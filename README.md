@@ -1,4 +1,14 @@
-# 3D5B
-App that allows students to send lecturers questions in real time in class. Part of a college app development project for 3rd year Computer
-Engineers. The Firebase API is used to allow instant cloud messaging between the lecturer and student. Each module that a lecturer teaches is
-added as a chatroom, where students on the class list for that module can join.
+# FriendlyChat
+
+This repository contains code for the FriendlyChat project in the [Firebase in a Weekend: Android by Google](https://www.udacity.com/course/firebase-in-a-weekend-by-google-android--ud0352) Udacity course.
+
+## Overview
+
+FriendlyChat is an app that allows users to send and receive text and photos in realtime across platforms.
+
+## Setup
+
+Setup requires creating a Firebase project. See https://firebase.google.com/ for more information.
+
+## License
+See [LICENSE](LICENSE)
