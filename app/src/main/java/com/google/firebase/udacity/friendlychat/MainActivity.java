@@ -55,7 +55,6 @@ public class MainActivity extends AppCompatActivity {
     private ListView mMessageListView;
     private MessageAdapter mMessageAdapter;
     private ProgressBar mProgressBar;
-    //private ImageButton mPhotoPickerButton;
     private EditText mMessageEditText;
     private Button mSendButton;
 
@@ -65,8 +64,6 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mMessagesDatabaseReference;
     private ChildEventListener mChildEventListener;
-    //private FirebaseStorage mFirebaseStorage;
-    //private StorageReference mChatPhotosStorageReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,6 +83,7 @@ public class MainActivity extends AppCompatActivity {
         mMessageListView = (ListView) findViewById(R.id.messageListView);
         mMessageEditText = (EditText) findViewById(R.id.messageEditText);
         mSendButton = (Button) findViewById(R.id.sendButton);
+        //mMessageListView.setVisibility(View.INVISIBLE);
 
         // Initialize message ListView and its adapter
         List<FriendlyMessage> friendlyMessages = new ArrayList<>();
