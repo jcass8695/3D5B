@@ -27,7 +27,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 
@@ -36,9 +35,6 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageException;
-import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
     private ProgressBar mProgressBar;
     private EditText mMessageEditText;
     private Button mSendButton;
+    private Button mSignout;
 
     private String mUsername;
 
@@ -70,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mUsername = JACK;
+        //mUsername = JACK;
 
         // References to Firebase realtime database.
         // mFirebaseDatabase = access to root of database, mMessagesDatabaseReference = access to "messages" portion of database
@@ -83,6 +80,8 @@ public class MainActivity extends AppCompatActivity {
         mMessageListView = (ListView) findViewById(R.id.messageListView);
         mMessageEditText = (EditText) findViewById(R.id.messageEditText);
         mSendButton = (Button) findViewById(R.id.sendButton);
+        mSignout = (Button) findViewById(R.id.sign_out_menu);
+
         //mMessageListView.setVisibility(View.INVISIBLE);
 
         // Initialize message ListView and its adapter
@@ -152,7 +151,12 @@ public class MainActivity extends AppCompatActivity {
         };
         // Attach childEventListener to the "messages" section of the dbase
         mMessagesDatabaseReference.addChildEventListener(mChildEventListener);
+
+
+
     }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -163,6 +167,13 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        return super.onOptionsItemSelected(item);
+        switch (item.getItemId()) {
+            case R.id.sign_out_menu:
+                Intent intent = new Intent(getApplicationContext(), Sign_in.class);
+                startActivityForResult(intent, 0);
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }
