@@ -17,6 +17,7 @@ public final class database extends SQLiteOpenHelper {
     public static final String last_name = "last_name";
     public static final String e_mail = "e_mail";
     public static final String password = "password";
+    public static final String course = "course";
 
     public database(Context context) {
         super(context, database_name, null, 1);
