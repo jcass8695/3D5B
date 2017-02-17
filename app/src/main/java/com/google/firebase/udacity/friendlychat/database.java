@@ -14,7 +14,9 @@ public final class database extends SQLiteOpenHelper {
     public static final String database_name = "chat_room";
     public static final String table_stu = "students";
     public static final String table_lec = "lecturers";
-    public static final String table_mod = "modules";
+    public static final String table_Cmod = "Cmodules";  //Electronic eng
+    public static final String table_Dmod = "Dmodules"; //Computer eng
+    public static final String table_CDmod = "CDmodules"; //Electronic & Computer eng
     public static final String first_name = "first_name";
     public static final String last_name = "last_name";
     public static final String e_mail = "e_mail";
@@ -29,14 +31,20 @@ public final class database extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         //students table
-        db.execSQL("create table "+table_stu+"(first_name text, last_name text, e_mail text primary key, password text, course text");
+        db.execSQL("create table "+table_stu+"(first_name text, last_name text, e_mail text primary key, password text, course text foreign key");
 
         /* maybe not needed yet
         //lecturers table
         db.execSQL("create table "+table_lec+"(first_name text, last_name text, e_mail text primary key, password text"); */
 
-        //module table
-        db.execSQL("create table "+table_mod+"(module text primary key, course text");
+        //Electronic Eng module table
+        db.execSQL("create table "+table_Cmod+"(module text primary key, course text");
+
+        //Computer Eng module table
+        db.execSQL("create table "+table_Dmod+"(module text primary key, course text");
+
+        //Electronic & Computer Eng module table
+        db.execSQL("create table "+table_CDmod+"(module text primary key, course text");
     }
 
     @Override
@@ -44,7 +52,9 @@ public final class database extends SQLiteOpenHelper {
         //on upgrade drop old tables
         db.execSQL("drop table if exists " +table_stu);
        /* db.execSQL("drop table if exists " +table_lec);  maybe not needed yet */
-        db.execSQL("drop table if exists " +table_mod);
+        db.execSQL("drop table if exists " +table_Cmod);
+        db.execSQL("drop table if exists " +table_Dmod);
+        db.execSQL("drop table if exists " +table_CDmod);
 
         //create new tables
         onCreate(db);
@@ -70,10 +80,32 @@ public final class database extends SQLiteOpenHelper {
         return true;
     };*/
 
-    //insert values to module table
+    //insert values to Electronic Eng module table
     public boolean insert_module(String module, String course){
         SQLiteDatabase db=this.getWritableDatabase();
-        String query="insert into modules values ('"+module+"', '"+course+"')";
+        String query="insert into Cmodules values ('"+module+"', '"+course+"')";
+        Cursor cursor=db.rawQuery(query, null);
+
+        cursor.close();
+
+        return true;
+    }
+
+    //insert values to Computer Eng module table
+    public boolean insert_module(String module, String course){
+        SQLiteDatabase db=this.getWritableDatabase();
+        String query="insert into Dmodules values ('"+module+"', '"+course+"')";
+        Cursor cursor=db.rawQuery(query, null);
+
+        cursor.close();
+
+        return true;
+    }
+
+    //insert values to Electronic & Computer Eng module table
+    public boolean insert_module(String module, String course){
+        SQLiteDatabase db=this.getWritableDatabase();
+        String query="insert into CDmodules values ('"+module+"', '"+course+"')";
         Cursor cursor=db.rawQuery(query, null);
 
         cursor.close();

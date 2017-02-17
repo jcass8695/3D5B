@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Aoife on 16/02/2017.
@@ -37,14 +38,25 @@ public class queries{
         SQLiteDatabase db = this.getWritableDatabase();
 
         //run query to get modules
-        String query = "select * from " + table_mod + " where course='" + course + "'";
+        if (course=="Electronic Engineering") {
+            String query = "select * from " + table_Cmod + " where course='" + course + "'";
+        }
+        else if (course=="Computer Engineering"){
+            String query = "select * from " + table_Dmod + " where course='" + course + "'";
+        }
+        else if (course=="Electronic and Computer Engineering"){
+            String query = "select * from " + table_CDmod + " where course='" + course + "'";
+        }
         Cursor cursor = db.rawQuery(query, null);
+
         //loop through the rows
         if (cursor.moveToFirst()) {
             do {
-                //something here
+                String module = cursor.getString(cursor.);
+                List.add(module);
+                cursor.moveToNext();
             }
-            while (cursor.moveToNext());
+            while (cursor.isAfterLast()==false);
             }
 
         cursor.close();
