@@ -33,6 +33,7 @@ public class Sign_in extends AppCompatActivity {
         sign_in=(Button)findViewById(R.id.sign_in);
         sign_up=(TextView)findViewById(R.id.sign_up);
 
+
         sign_up.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
