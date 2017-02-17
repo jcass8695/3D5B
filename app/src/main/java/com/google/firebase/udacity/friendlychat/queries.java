@@ -14,6 +14,11 @@ import java.util.List;
  * Created by Aoife on 16/02/2017.
  */
 
+/*
+Doesn't actually need to be its own activity I just wanted to work on it in a separate window.
+Will merge with database activity when ready.
+ */
+
 public class queries{
 
     //retrieve the student's course
