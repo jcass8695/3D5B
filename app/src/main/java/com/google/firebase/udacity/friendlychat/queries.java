@@ -13,36 +13,35 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class queries{
 
-    public String getCourse(){
+    //retrieve the student's course
+    public String getCourse(String e_mail){
         SQLiteDatabase db=this.getWritableDatabase();
         //run query to get student's course
-        String query="select * from students where e_mail='"+e_mail+"'";
+        String query="select * from "+table_stu+" where e_mail='"+e_mail+"'";
+        Cursor cursor = db.rawQuery(query, null);
+        cursor.moveToLast();
         //store course in a variable
-        public String course;
+        String course = cursor.getString(5);
         //return the course as a string
         return course;
-    }
+    };
 
-    public int getModules(){
+    //retrieve the modules associated with that course
+    public int getModules(String course){
         SQLiteDatabase db=this.getWritableDatabase();
-        public int numRows = db.getCount(); //find how many rows are in the database
-        public int loopCounter = 0; //counter for loop
-        public int moduleCounter = 0; //counts number of modules found
-        public String[] modules = new String[12]; //array to hold modules
+        int moduleCounter = 0; //counts number of modules found
+        String[] modules = new String[12]; //array to hold modules
 
         //check all rows, return all modules associated with that course
-        while (loopCounter<=numRows){
+        while (moduleCounter<=12){
             //run query to get each module
             String query="select * from modules where course='"+course+"'";
-
-            if() {
-                //if we find a corresponding module, place it in the array
-                modules[moduleCounter] = ;
-                moduleCounter++;
-            }
-
-            //increment loop counter
-            loopCounter++;
+            Cursor cursor = db.rawQuery(query, null);
+            cursor.moveToLast();
+            //when we find a corresponding module, place it in the array
+            modules[moduleCounter] = cursor.getString(1);
+            //increment module counter
+            moduleCounter++;
         }
 
     };
