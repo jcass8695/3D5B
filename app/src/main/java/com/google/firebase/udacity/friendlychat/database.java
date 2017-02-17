@@ -55,8 +55,10 @@ public final class database extends SQLiteOpenHelper {
         SQLiteDatabase db=this.getWritableDatabase();
         String query="insert into students values ('"+first_name+"', '"+last_name+"', '"+e_mail+"', '"+password+"', '"+course+"')";
         Cursor cursor=db.rawQuery(query, null);
+        cursor.close();
+
         return true;
-    };
+    }
 
     /* maybe not needed yet
     //insert values to lecturer table
@@ -64,6 +66,7 @@ public final class database extends SQLiteOpenHelper {
         SQLiteDatabase db=this.getWritableDatabase();
         String query="insert into lecturers values ('"+first_name+"', '"+last_name+"', '"+e_mail+"', '"+password+"')";
         Cursor cursor=db.rawQuery(query, null);
+        cursor.close();
         return true;
     };*/
 
@@ -72,8 +75,11 @@ public final class database extends SQLiteOpenHelper {
         SQLiteDatabase db=this.getWritableDatabase();
         String query="insert into modules values ('"+module+"', '"+course+"')";
         Cursor cursor=db.rawQuery(query, null);
+
+        cursor.close();
+
         return true;
-    };
+    }
 
     //student login authentication
     public boolean check_student(String e_mail, String password){
@@ -83,11 +89,13 @@ public final class database extends SQLiteOpenHelper {
         cursor.moveToLast();
         String result=cursor.getString(4);
         if(result.equals(password)){
+            cursor.close();
             return true;
         }
         else
+            cursor.close();
             return false;
-    };
+    }
 
     /* maybe not needed yet
     //lecturer login authentication
@@ -98,9 +106,11 @@ public final class database extends SQLiteOpenHelper {
         cursor.moveToLast();
         String result=cursor.getString(4);
         if(result.equals(password)){
+            cursor.close();
             return true;
         }
         else
+            cursor.close();
             return false;
     };*/
 }

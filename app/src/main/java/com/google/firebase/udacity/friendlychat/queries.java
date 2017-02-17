@@ -7,6 +7,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.util.ArrayList;
+
 /**
  * Created by Aoife on 16/02/2017.
  */
@@ -22,28 +24,33 @@ public class queries{
         cursor.moveToLast();
         //store course in a variable
         String course = cursor.getString(5);
+
+        cursor.close();
         //return the course as a string
         return course;
-    };
+    }
 
     //retrieve the modules associated with that course
-    public int getModules(String course){
-        SQLiteDatabase db=this.getWritableDatabase();
-        int moduleCounter = 0; //counts number of modules found
-        String[] modules = new String[12]; //array to hold modules
+    public List<modules> getModules(String course){
 
-        //check all rows, return all modules associated with that course
-        while (moduleCounter<=12){
-            //run query to get each module
-            String query="select * from modules where course='"+course+"'";
-            Cursor cursor = db.rawQuery(query, null);
-            cursor.moveToLast();
-            //when we find a corresponding module, place it in the array
-            modules[moduleCounter] = cursor.getString(1);
-            //increment module counter
-            moduleCounter++;
-        }
+        List<modules> moduleList = new ArrayList<modules>();
+        SQLiteDatabase db = this.getWritableDatabase();
 
-    };
+        //run query to get modules
+        String query = "select * from " + table_mod + " where course='" + course + "'";
+        Cursor cursor = db.rawQuery(query, null);
+        //loop through the rows
+        if (cursor.moveToFirst()) {
+            do {
+                //something here
+            }
+            while (cursor.moveToNext());
+            }
+
+        cursor.close();
+
+        //return array of modules
+        return moduleList;
+    }
 
 }
