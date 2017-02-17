@@ -84,77 +84,68 @@ public final class database extends SQLiteOpenHelper {
 
     //function to insert values to Electronic Eng module table
     public void insert_Cmodule(String module){
-        ContentValues modules = new ContentValues(11);
-        modules.put("module", module);
-        getWritableDatabase().insert("module", modules);
+        ContentValues cv = new ContentValues(11);
+        cv.put(database.table_Cmod, module);
+        getWritableDatabase().insert("module",null, cv);
     }
 
     //function to insert values to Computer Eng module table
     public void insert_Dmodule(String module){
-        ContentValues modules = new ContentValues(12);
-        modules.put("module", module);
-        getWritableDatabase().insert("module", modules);
+        ContentValues cv = new ContentValues(12);
+        cv.put(database.table_Dmod, module);
+        getWritableDatabase().insert("module",null, cv);
     }
 
     //function to insert values to Electronic & Computer Eng module table
     public void insert_CDmodule(String module){
-        ContentValues modules = new ContentValues(12);
-        modules.put("module", module);
-        getWritableDatabase().insert("module", modules);
+        ContentValues cv = new ContentValues(12);
+        cv.put(database.table_CDmod, module);
+        getWritableDatabase().insert("module",null, cv);
     }
 
-   /* //actually inserting the values into the module tables
-    public void onCreate(Bundle savedInstanceState){
-        super.onCreate(savedInstanceState);
-        SQLiteOpenHelper = new SQLiteOpenHelper(this) {
-            @Override
-            public void onCreate(SQLiteDatabase db) {
-                //add Electronic Eng modules
-                SQLiteOpenHelper.insert_Cmodule("Engineering Mathematics V");
-                SQLiteOpenHelper.insert_Cmodule("Probability and Statistics");
-                SQLiteOpenHelper.insert_Cmodule("Innovation and Entrepreneurship for Engineers");
-                SQLiteOpenHelper.insert_Cmodule("Signals and Systems");
-                SQLiteOpenHelper.insert_Cmodule("Digital Circuits");
-                SQLiteOpenHelper.insert_Cmodule("Microprocessor Systems I");
-                SQLiteOpenHelper.insert_Cmodule("Data Structures and Algorithms");
-                SQLiteOpenHelper.insert_Cmodule("Analogue Circuits");
-                SQLiteOpenHelper.insert_Cmodule("Electronic Engineering Project B");
-                SQLiteOpenHelper.insert_Cmodule("Telecommunnications");
-                SQLiteOpenHelper.insert_Cmodule("Digital Logic Design");
+    /*
+    //add Electronic Eng modules
+    SQLiteOpenHelper.insert_Cmodule("Engineering Mathematics V");
+    SQLiteOpenHelper.insert_Cmodule("Probability and Statistics");
+    SQLiteOpenHelper.insert_Cmodule("Innovation and Entrepreneurship for Engineers");
+    SQLiteOpenHelper.insert_Cmodule("Signals and Systems");
+    SQLiteOpenHelper.insert_Cmodule("Digital Circuits");
+    SQLiteOpenHelper.insert_Cmodule("Microprocessor Systems I");
+    SQLiteOpenHelper.insert_Cmodule("Data Structures and Algorithms");
+    SQLiteOpenHelper.insert_Cmodule("Analogue Circuits");
+    SQLiteOpenHelper.insert_Cmodule("Electronic Engineering Project A");
+    SQLiteOpenHelper.insert_Cmodule("Telecommunnications");
+    SQLiteOpenHelper.insert_Cmodule("Digital Logic Design");
 
-                //add Computer Eng modules
-                SQLiteOpenHelper.insert_Dmodule("Engineering Mathematics V");
-                SQLiteOpenHelper.insert_Dmodule("Probability and Statistics");
-                SQLiteOpenHelper.insert_Dmodule("Innovation and Entrepreneurship for Engineers");
-                SQLiteOpenHelper.insert_Dmodule("Signals and Systems");
-                SQLiteOpenHelper.insert_Dmodule("Digital Circuits");
-                SQLiteOpenHelper.insert_Dmodule("Data Structures and Algorithms");
-                SQLiteOpenHelper.insert_Dmodule("Microprocessor Systems I");
-                SQLiteOpenHelper.insert_Dmodule("Microprocessor Systems II");
-                SQLiteOpenHelper.insert_Dmodule("Computer Architecture II");
-                SQLiteOpenHelper.insert_Dmodule("Operating Systems and Concurrent Systems");
-
-                //add Electronic & Computer Eng modules
-                SQLiteOpenHelper.insert_CDmodule("Engineering Mathematics V");
-                SQLiteOpenHelper.insert_CDmodule("Probability and Statistics");
-                SQLiteOpenHelper.insert_CDmodule("Innovation and Entrepreneurship for Engineers");
-                SQLiteOpenHelper.insert_CDmodule("Signals and Systems");
-                SQLiteOpenHelper.insert_CDmodule("Digital Circuits");
-                SQLiteOpenHelper.insert_CDmodule("Data Structures and Algorithms");
-                SQLiteOpenHelper.insert_CDmodule("Microprocessor Systems I");
-                SQLiteOpenHelper.insert_CDmodule("Telecommunnications");
-                SQLiteOpenHelper.insert_CDmodule("Digital Logic Design");
-                SQLiteOpenHelper.insert_CDmodule("Microprocessor Systems II");
-            }
-
-            @Override
-            public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
-            }
-        };
+    //add Computer Eng modules
+    SQLiteOpenHelper.insert_Dmodule("Engineering Mathematics V");
+    SQLiteOpenHelper.insert_Dmodule("Probability and Statistics");
+    SQLiteOpenHelper.insert_Dmodule("Innovation and Entrepreneurship for Engineers");
+    SQLiteOpenHelper.insert_Dmodule("Signals and Systems");
+    SQLiteOpenHelper.insert_Dmodule("Digital Circuits");
+    SQLiteOpenHelper.insert_Dmodule("Data Structures and Algorithms");
+    SQLiteOpenHelper.insert_Dmodule("Microprocessor Systems I");
+    SQLiteOpenHelper.insert_Dmodule("Microprocessor Systems II");
+    SQLiteOpenHelper.insert_Dmodule("Computer Architecture II");
+    SQLiteOpenHelper.insert_Dmodule("Operating Systems and Concurrent Systems");
+    SQLiteOpenHelper.insert_Dmodule("Computer Networks");
+    SQLiteOpenHelper.insert_Dmodule("Software Design and Implementation");
 
 
-    }*/
+    //add Electronic & Computer Eng modules
+    SQLiteOpenHelper.insert_CDmodule("Engineering Mathematics V");
+    SQLiteOpenHelper.insert_CDmodule("Probability and Statistics");
+    SQLiteOpenHelper.insert_CDmodule("Innovation and Entrepreneurship for Engineers");
+    SQLiteOpenHelper.insert_CDmodule("Signals and Systems");
+    SQLiteOpenHelper.insert_CDmodule("Digital Circuits");
+    SQLiteOpenHelper.insert_CDmodule("Data Structures and Algorithms");
+    SQLiteOpenHelper.insert_CDmodule("Microprocessor Systems I");
+    SQLiteOpenHelper.insert_CDmodule("Telecommunnications");
+    SQLiteOpenHelper.insert_CDmodule("Digital Logic Design");
+    SQLiteOpenHelper.insert_CDmodule("Microprocessor Systems II");
+    SQLiteOpenHelper.insert_CDmodule("Computer Networks");
+    SQLiteOpenHelper.insert_CDmodule("Electronic Engineering Project B");
+    */
 
     //student login authentication
     public boolean check_student(String e_mail, String password){
