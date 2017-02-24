@@ -42,7 +42,6 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
-    //private static final int RC_PHOTO_PICKER = 2;
 
     public static final String ANONYMOUS = "anonymous";
     public static final String JACK = "Jack";
@@ -69,8 +68,6 @@ public class MainActivity extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         mUsername = (String) extras.get(mUsername);
 
-        //mUsername = JACK;
-
         // References to Firebase realtime database.
         // mFirebaseDatabase = access to root of database, mMessagesDatabaseReference = access to "messages" portion of database
         mFirebaseDatabase = FirebaseDatabase.getInstance();
@@ -88,6 +85,8 @@ public class MainActivity extends AppCompatActivity {
 
         // Initialize message ListView and its adapter
         List<FriendlyMessage> friendlyMessages = new ArrayList<>();
+        List<String> chatroomList = new ArrayList<>();
+
         mMessageAdapter = new MessageAdapter(this, R.layout.item_message, friendlyMessages);
         mMessageListView.setAdapter(mMessageAdapter);
 
