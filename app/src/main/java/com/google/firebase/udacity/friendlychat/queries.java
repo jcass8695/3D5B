@@ -41,19 +41,19 @@ public class queries{
 
         List<modules> moduleList = new ArrayList<modules>();
         SQLiteDatabase db = this.getWritableDatabase();
-
+        String query;
         //run query to get modules
-        if (course=="Electronic Engineering") {
-            String query = "select * from " + table_Cmod + " where course='" + course + "'";
+        if (course.equals("Electronic Engineering")) {
+            query = "select * from " + table_Cmod + " where course='" + course + "'";
         }
-        else if (course=="Computer Engineering"){
-            String query = "select * from " + table_Dmod + " where course='" + course + "'";
+        else if (course.equals("Computer Engineering")){
+            query = "select * from " + table_Dmod + " where course='" + course + "'";
         }
-        else if (course=="Electronic and Computer Engineering"){
-            String query = "select * from " + table_CDmod + " where course='" + course + "'";
+        else if (course.equals("Electronic and Computer Engineering")){
+            query = "select * from " + table_CDmod + " where course='" + course + "'";
         }
-        Cursor cursor = db.rawQuery(query, null);
 
+        Cursor cursor = db.rawQuery(query, null);
         //loop through the rows
         if (cursor.moveToFirst()) {
             do {
@@ -61,7 +61,7 @@ public class queries{
                 List.add(module);
                 cursor.moveToNext();
             }
-            while (cursor.isAfterLast()==false);
+            while (!cursor.isAfterLast());
             }
 
         cursor.close();
