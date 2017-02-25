@@ -38,11 +38,12 @@ public class queries{
 
     //retrieve the modules associated with that course
     public List<modules> getModules(String course){
-
-        List<modules> moduleList = new ArrayList<modules>();
+       
+        List<modules> moduleList = new ArrayList<modules>();  //create array as a list
         SQLiteDatabase db = this.getWritableDatabase();
-        String query;
-        //run query to get modules
+        String query; //variable to hold our DB query
+        
+        //specify query
         if (course.equals("Electronic Engineering")) {
             query = "select * from " + table_Cmod + " where course='" + course + "'";
         }
@@ -53,7 +54,7 @@ public class queries{
             query = "select * from " + table_CDmod + " where course='" + course + "'";
         }
 
-        Cursor cursor = db.rawQuery(query, null);
+        Cursor cursor = db.rawQuery(query, null); //run the query
         //loop through the rows
         if (cursor.moveToFirst()) {
             do {
