@@ -10,7 +10,7 @@ import android.widget.EditText;
 import com.google.android.gms.common.api.GoogleApiClient;
 
 public class Sign_Up extends AppCompatActivity {
-    private database db;
+    private login_database db;
     public static String NAME;
 
     EditText first_name;

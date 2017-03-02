@@ -14,7 +14,7 @@ import android.widget.TextView;
 
 
 public class Sign_in extends AppCompatActivity {
-    database db;
+    login_database db;
     public static String mUsername;
 
     TextView text_1;

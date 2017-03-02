@@ -45,7 +45,7 @@ dependencies {
     // Displaying images
     compile 'com.github.bumptech.glide:glide:3.6.1'
 
-    compile 'com.google.firebase:firebase-database:9.8.0'
+    compile 'com.google.firebase:firebase-login_database:9.8.0'
     compile 'com.google.firebase:firebase-storage:9.8.0'
     compile 'com.google.android.gms:play-services-appindexing:9.8.0'
 }

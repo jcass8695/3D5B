@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
 
     private String mUsername;
 
-    // Firebase database
+    // Firebase login_database
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mMessagesDatabaseReference;
     private ChildEventListener mChildEventListener;
@@ -69,8 +69,8 @@ public class MainActivity extends AppCompatActivity {
 
         //mUsername = JACK;
 
-        // References to Firebase realtime database.
-        // mFirebaseDatabase = access to root of database, mMessagesDatabaseReference = access to "messages" portion of database
+        // References to Firebase realtime login_database.
+        // mFirebaseDatabase = access to root of login_database, mMessagesDatabaseReference = access to "messages" portion of login_database
         mFirebaseDatabase = FirebaseDatabase.getInstance();
 
         mMessagesDatabaseReference = mFirebaseDatabase.getReference().child("messages");
