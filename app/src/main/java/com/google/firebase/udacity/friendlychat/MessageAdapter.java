@@ -25,12 +25,14 @@ public class MessageAdapter extends ArrayAdapter<FriendlyMessage> {
 
         TextView messageTextView = (TextView) convertView.findViewById(R.id.messageTextView);
         TextView authorTextView = (TextView) convertView.findViewById(R.id.nameTextView);
+        TextView upvoteTextView = (TextView) convertView.findViewById(R.id.upvoteTextView);
 
         FriendlyMessage message = getItem(position);
 
         messageTextView.setVisibility(View.VISIBLE);
         messageTextView.setText(message.getText());
         authorTextView.setText(message.getName());
+        upvoteTextView.setText(Integer.toString(message.getUpvote()));
 
         return convertView;
     }
