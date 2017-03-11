@@ -1,5 +1,12 @@
 <resources>
-    <string name="app_name">Friendly Chat</string>
+    <string name="app_name">Hands Up!</string>
     <string name="sign_out">Sign Out</string>
     <string name="send_button_label">Send</string>
+    <string name="spinner_prompt">Select Colour</string>
+    <string-array name="colours_array">
+        <item>Select Theme</item>
+        <item>purple</item>
+        <item>red</item>
+    </string-array>
+
 </resources>

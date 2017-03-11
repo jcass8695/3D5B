@@ -4,7 +4,9 @@ package com.google.firebase.udacity.friendlychat;
  * Created by HughLavery on 13/02/2017.
  */
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -13,6 +15,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 public class Sign_in extends AppCompatActivity {
@@ -32,6 +35,16 @@ public class Sign_in extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sign_in);
+
+        SharedPreferences sharedPref = getSharedPreferences("mypref", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        String colour = sharedPref.getString("colour", "");
+        Toast.makeText(this, "theme====: " + colour, Toast.LENGTH_LONG).show();
+
+        if(colour == "red"){
+            Toast.makeText(this, "theme= in if =: " + colour, Toast.LENGTH_LONG).show();
+            setTheme(R.style.RedTheme);
+        }
 
         image_1=(ImageView)findViewById(R.id.image_1);
         e_mail=(EditText)findViewById(R.id.e_mail);

@@ -21,10 +21,9 @@
 
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:srcCompat="@drawable/name"
-            android:id="@+id/image_1"
-            android:layout_weight="1.1" />
+            android:layout_height="143dp"
+            app:srcCompat="@drawable/purp"
+            android:id="@+id/image_1" />
 
         <EditText
             android:layout_width="match_parent"
@@ -49,13 +48,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/sign_in"
-            style="@android:style/Widget.Button"
+            style="@style/CustomButton"
             android:layout_marginTop="25dp"
             android:layout_below="@+id/password"
             android:padding="12dp"
             android:layout_marginBottom="24dp"
             android:onClick="onClick"
-            android:layout_centerHorizontal="true" />
+            android:layout_centerHorizontal="true"
+            android:textAllCaps="false" />
 
         <LinearLayout
             android:orientation="horizontal"
