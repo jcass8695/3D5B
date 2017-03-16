@@ -7,8 +7,11 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:colorButtonNormal">@color/colorPrimary</item>
-        <item name="android:textColor">#FFFFFF</item>
+        <item name="colorButtonNormal">@color/colorPrimary</item>
+        <item name="android:buttonBarStyle">@style/CustomButton</item>
+        <item name="android:buttonBarButtonStyle">@style/CustomButton</item>
+        <item name="android:buttonStyle">@style/CustomButton</item>
+        <item name="android:textAppearanceButton">@style/TextAppearance.AppCompat.Button.Custom</item>
         <item name="logo_name">@drawable/purp</item>
     </style>
 
@@ -17,9 +20,11 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:colorButtonNormal">@drawable/button_selector</item>
-        <item name="colorButtonNormal">@drawable/button_selector</item>
+        <item name="colorButtonNormal">@color/colorPrimary</item>
+        <item name="android:buttonBarStyle">@style/CustomButton</item>
+        <item name="android:buttonBarButtonStyle">@style/CustomButton</item>
         <item name="android:buttonStyle">@style/CustomButton</item>
+        <item name="android:textAppearanceButton">@style/TextAppearance.AppCompat.Button.Custom</item>
         <item name="logo_name">@drawable/purp</item>
     </style>
 

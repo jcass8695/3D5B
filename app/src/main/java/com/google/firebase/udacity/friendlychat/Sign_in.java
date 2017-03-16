@@ -34,7 +34,6 @@ public class Sign_in extends AppCompatActivity {
         SharedPreferences sharedPref = getSharedPreferences("mypref", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
         String colour = sharedPref.getString("colour", "");
-        Toast.makeText(this, "theme====: " + colour, Toast.LENGTH_LONG).show();
 
         if(colour.equals("red")){
             setTheme(R.style.RedThemeNoActionBar);

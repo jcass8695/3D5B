@@ -41,7 +41,6 @@ public class Sign_Up extends AppCompatActivity implements OnItemSelectedListener
         SharedPreferences sharedPref = getSharedPreferences("mypref", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
         String colour = sharedPref.getString("colour", "");
-        Toast.makeText(this, "theme====: " + colour, Toast.LENGTH_LONG).show();
 
         if(colour.equals("red")){
             setTheme(R.style.RedThemeNoActionBar);
@@ -93,7 +92,7 @@ public class Sign_Up extends AppCompatActivity implements OnItemSelectedListener
             editor.putString("colour", item);
             editor.apply();
             // Showing selected spinner item
-            Toast.makeText(parent.getContext(), "Selected: " + sharedPref.getString("colour", ""), Toast.LENGTH_LONG).show();
+            //Toast.makeText(parent.getContext(), "Selected: " + sharedPref.getString("colour", ""), Toast.LENGTH_LONG).show();
 
         }
     }

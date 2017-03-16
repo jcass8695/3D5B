@@ -95,9 +95,9 @@
                 android:layout_height="match_parent"
                 android:layout_marginBottom="42dp"
                 android:id="@+id/sign_up"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                 android:layout_weight=".9"
-                android:layout_alignParentBottom="true" />
+                android:layout_alignParentBottom="true"
+                android:textAllCaps="false"/>
 
         </LinearLayout>
     </LinearLayout>

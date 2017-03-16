@@ -16,7 +16,6 @@
         android:layout_height="match_parent"
         android:layout_above="@+id/linearLayout"
         android:stackFromBottom="true"
-        android:divider="@android:color/holo_green_light"
         android:transcriptMode="alwaysScroll"
         tools:listitem="@layout/item_message" />
 
@@ -42,7 +41,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-            android:enabled="false"
             android:text="@string/send_button_label"
              />
 
