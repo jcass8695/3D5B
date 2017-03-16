@@ -31,20 +31,24 @@ public class Sign_in extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.sign_in);
-
         SharedPreferences sharedPref = getSharedPreferences("mypref", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
         String colour = sharedPref.getString("colour", "");
         Toast.makeText(this, "theme====: " + colour, Toast.LENGTH_LONG).show();
 
-        if(colour == "red"){
-            Toast.makeText(this, "theme= in if =: " + colour, Toast.LENGTH_LONG).show();
-            setTheme(R.style.RedTheme);
+        if(colour.equals("red")){
+            setTheme(R.style.RedThemeNoActionBar);
         }
+
+        else {
+
+        }
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.sign_in);
+
+
 
         image_1=(ImageView)findViewById(R.id.image_1);
         e_mail=(EditText)findViewById(R.id.e_mail);

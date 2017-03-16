@@ -38,7 +38,18 @@ public class Sign_Up extends AppCompatActivity implements OnItemSelectedListener
     private GoogleApiClient client2;
 
     protected void onCreate(Bundle savedInstanceState) {
+        SharedPreferences sharedPref = getSharedPreferences("mypref", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        String colour = sharedPref.getString("colour", "");
+        Toast.makeText(this, "theme====: " + colour, Toast.LENGTH_LONG).show();
 
+        if(colour.equals("red")){
+            setTheme(R.style.RedThemeNoActionBar);
+        }
+
+        else {
+
+        }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign__up);
 

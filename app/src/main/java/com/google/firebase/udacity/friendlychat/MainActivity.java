@@ -15,7 +15,9 @@
  */
 package com.google.firebase.udacity.friendlychat;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
@@ -29,6 +31,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -64,10 +67,20 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        SharedPreferences sharedPref = getSharedPreferences("mypref", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        String colour = sharedPref.getString("colour", "");
+        Toast.makeText(this, "theme====: " + colour, Toast.LENGTH_LONG).show();
+
+        if(colour.equals("red")){
+            setTheme(R.style.RedThemeWithActionBar);
+        }
+
+        else {
+
+        }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        //mUsername = JACK;
 
         // References to Firebase realtime database.
         // mFirebaseDatabase = access to root of database, mMessagesDatabaseReference = access to "messages" portion of database
