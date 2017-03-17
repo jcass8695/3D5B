@@ -15,10 +15,14 @@
  */
 package com.google.firebase.udacity.friendlychat;
 
+import java.util.ArrayList;
+
 public class FriendlyMessage {
 
     private String text;
     private String name;
+    private int upvote;
+    ArrayList<String> hasUpvoted;
 
     public FriendlyMessage() {
     }
@@ -26,6 +30,7 @@ public class FriendlyMessage {
     public FriendlyMessage(String text, String name) {
         this.text = text;
         this.name = name;
+        this.upvote = 0;
     }
 
     public String getText() {
@@ -43,4 +48,14 @@ public class FriendlyMessage {
     public void setName(String name) {
         this.name = name;
     }
+    public int getUpvote() { return upvote; }
+
+    public void setUpvote(int upvote) { this.upvote = upvote; }
+
+    public void incrementUpvote() { this.upvote++; }
+
+    public ArrayList<String> getHasUpvoted() { return hasUpvoted; }
+
+    public void addToUpvoted(String user) { this.hasUpvoted.add(user); }
+
 }

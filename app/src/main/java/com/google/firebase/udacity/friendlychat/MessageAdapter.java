@@ -52,8 +52,6 @@ public class MessageAdapter extends BaseAdapter {
         else
             holder = (ViewHolder) convertView.getTag();
 
-       // TextView messageTextView = (TextView) convertView.findViewById(R.id.messageTextView);
-        //TextView authorTextView = (TextView) convertView.findViewById(R.id.nameTextView);
         LinearLayout.LayoutParams layoutParams =
                 (LinearLayout.LayoutParams) holder.contentWithBG.getLayoutParams();
         layoutParams.gravity = Gravity.RIGHT;
@@ -70,6 +68,7 @@ public class MessageAdapter extends BaseAdapter {
 
         holder.txtMessage.setText(message.getText());
         holder.contentWithBG.setBackgroundResource(R.drawable.patch);
+        holder.upvotes.setText(Integer.toString(message.getUpvote()));
         //holder.msg.setTextColor(R.color.black);
         //messageTextView.setVisibility(View.VISIBLE);
         //messageTextView.setText(message.getText());
@@ -85,14 +84,15 @@ public class MessageAdapter extends BaseAdapter {
         holder.txtMessage = (TextView) v.findViewById(R.id.messageTextView);
         holder.contentWithBG = (LinearLayout) v.findViewById(R.id.contentWithBackground);
         holder.content = (LinearLayout) v.findViewById(R.id.content);
+        holder.upvotes = (TextView) v.findViewById(R.id.upvoteTextView);
         return holder;
     }
 
     private static class ViewHolder {
         public TextView txtMessage;
         public LinearLayout contentWithBG;
-
         public LinearLayout content;
+        public TextView upvotes;
 
     }
     public void add(FriendlyMessage message) {

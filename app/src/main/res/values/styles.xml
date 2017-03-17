@@ -1,18 +1,21 @@
 <resources>
     <attr name="logo_name" format="reference"/>
-
+    <attr name="thumbs_up" format="reference"/>
+    <attr name="colorLight" format="reference"/>
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorLight">@color/colorLight</item>
         <item name="colorButtonNormal">@color/colorPrimary</item>
         <item name="android:buttonBarStyle">@style/CustomButton</item>
         <item name="android:buttonBarButtonStyle">@style/CustomButton</item>
         <item name="android:buttonStyle">@style/CustomButton</item>
         <item name="android:textAppearanceButton">@style/TextAppearance.AppCompat.Button.Custom</item>
         <item name="logo_name">@drawable/purp</item>
+        <item name="thumbs_up">@drawable/purple_like_32</item>
     </style>
 
     <style name="NoActionBarTheme" parent="Theme.AppCompat.Light.NoActionBar">
@@ -20,36 +23,44 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorLight">@color/colorLight</item>
         <item name="colorButtonNormal">@color/colorPrimary</item>
         <item name="android:buttonBarStyle">@style/CustomButton</item>
         <item name="android:buttonBarButtonStyle">@style/CustomButton</item>
         <item name="android:buttonStyle">@style/CustomButton</item>
         <item name="android:textAppearanceButton">@style/TextAppearance.AppCompat.Button.Custom</item>
         <item name="logo_name">@drawable/purp</item>
+        <item name="thumbs_up">@drawable/purple_like_32</item>
+
     </style>
 
     <style name="RedThemeNoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/red</item>
         <item name="colorPrimaryDark">@color/redDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorLight">@color/pink</item>
         <item name="colorButtonNormal">@color/red</item>
         <item name="android:buttonBarStyle">@style/CustomButtonRed</item>
         <item name="android:buttonBarButtonStyle">@style/CustomButtonRed</item>
         <item name="android:buttonStyle">@style/CustomButtonRed</item>
         <item name="android:textAppearanceButton">@style/TextAppearance.AppCompat.Button.Custom</item>
         <item name="logo_name">@drawable/red</item>
+        <item name="thumbs_up">@drawable/red_like_32</item>
     </style>
 
     <style name="RedThemeWithActionBar" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="colorPrimary">@color/red</item>
         <item name="colorPrimaryDark">@color/redDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorLight">@color/pink</item>
         <item name="colorButtonNormal">@color/red</item>
         <item name="android:buttonBarStyle">@style/CustomButtonRed</item>
         <item name="android:buttonBarButtonStyle">@style/CustomButtonRed</item>
         <item name="android:buttonStyle">@style/CustomButtonRed</item>
         <item name="android:textAppearanceButton">@style/TextAppearance.AppCompat.Button.Custom</item>
         <item name="logo_name">@drawable/red</item>
+        <item name="thumbs_up">@drawable/red_like_32</item>
+
     </style>
 
     <style name="CustomButton" parent="Widget.AppCompat.Button">

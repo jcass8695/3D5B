@@ -14,6 +14,7 @@
         <activity android:name=".Sign_Up"
             android:theme="@style/NoActionBarTheme"/>
         <activity android:name=".MainActivity" />
+        <activity android:name=".ChatRoom" />
         <activity android:name=".splash"
                   android:theme="@style/NoActionBarTheme">
             <intent-filter>

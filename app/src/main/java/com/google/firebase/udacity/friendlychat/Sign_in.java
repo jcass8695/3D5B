@@ -31,6 +31,7 @@ public class Sign_in extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //Theme Stuff////////////////////
         SharedPreferences sharedPref = getSharedPreferences("mypref", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
         String colour = sharedPref.getString("colour", "");
@@ -40,14 +41,11 @@ public class Sign_in extends AppCompatActivity {
         }
 
         else {
-
-        }
+        }////////////////////
         requestWindowFeature(Window.FEATURE_NO_TITLE);
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sign_in);
-
-
 
         image_1=(ImageView)findViewById(R.id.image_1);
         e_mail=(EditText)findViewById(R.id.e_mail);
