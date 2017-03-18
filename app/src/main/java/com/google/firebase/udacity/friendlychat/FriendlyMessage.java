@@ -22,7 +22,6 @@ public class FriendlyMessage {
     private String text;
     private String name;
     private int upvote;
-    ArrayList<String> hasUpvoted;
 
     public FriendlyMessage() {
     }
@@ -55,7 +54,4 @@ public class FriendlyMessage {
 
     public void incrementUpvote() { this.upvote++; }
 
-    public ArrayList<String> getHasUpvoted() { return hasUpvoted; }
-
-    public void addToUpvoted(String user) { this.hasUpvoted.add(user); }
 }

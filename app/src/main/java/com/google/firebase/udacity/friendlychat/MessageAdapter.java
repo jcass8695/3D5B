@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Button;
 
 import com.bumptech.glide.Glide;
 
@@ -25,14 +26,23 @@ public class MessageAdapter extends ArrayAdapter<FriendlyMessage> {
 
         TextView messageTextView = (TextView) convertView.findViewById(R.id.messageTextView);
         TextView authorTextView = (TextView) convertView.findViewById(R.id.nameTextView);
-        TextView upvoteTextView = (TextView) convertView.findViewById(R.id.upvoteTextView);
+        final TextView upvoteTextView = (TextView) convertView.findViewById(R.id.upvoteTextView);
+        Button upvoteButton = (Button) convertView.findViewById(R.id.upvoteButton);
 
-        FriendlyMessage message = getItem(position);
+        final FriendlyMessage message = getItem(position);
 
         messageTextView.setVisibility(View.VISIBLE);
         messageTextView.setText(message.getText());
         authorTextView.setText(message.getName());
         upvoteTextView.setText(Integer.toString(message.getUpvote()));
+
+        upvoteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                message.incrementUpvote();
+                upvoteTextView.setText(Integer.toString(message.getUpvote()));
+            }
+        });
 
         return convertView;
     }
