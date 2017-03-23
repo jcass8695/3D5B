@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -110,8 +111,13 @@ public class ChatRoom extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // Create a new message object with text from the EditText widget and attach the username to it. Null for photo url
-                FriendlyMessage friendlyMessage = new FriendlyMessage(mMessageEditText.getText().toString(), mUsername);
-                mMessagesDatabaseReference.push().setValue(friendlyMessage);
+                FriendlyMessage friendlyMessage = new FriendlyMessage(mMessageEditText.getText().toString(), mUsername, roomName);
+
+                String messageKey = mMessagesDatabaseReference.push().getKey();
+                friendlyMessage.setFbaseKey(messageKey);
+                mMessagesDatabaseReference.child(messageKey).setValue(friendlyMessage);
+
+                Log.d(TAG, messageKey);
                 // Clear input box
                 mMessageEditText.setText("");
             }
@@ -146,8 +152,4 @@ public class ChatRoom extends AppCompatActivity {
 
 
     }
-
-
-
-
 }

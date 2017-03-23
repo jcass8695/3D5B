@@ -21,15 +21,20 @@ public class FriendlyMessage {
 
     private String text;
     private String name;
+    private String fbaseKey;
+    private String location;
     private int upvote;
 
     public FriendlyMessage() {
     }
 
-    public FriendlyMessage(String text, String name) {
+    public FriendlyMessage(String text, String name, String location) {
         this.text = text;
         this.name = name;
+        this.location = location;
         this.upvote = 0;
+        this.fbaseKey = "";
+
     }
 
     public String getText() {
@@ -43,6 +48,12 @@ public class FriendlyMessage {
     public String getName() {
         return name;
     }
+
+    public String getFbaseKey() { return fbaseKey; }
+
+    public void setFbaseKey(String key) { this.fbaseKey = key; }
+
+    public String getLocation() { return location;}
 
     public void setName(String name) {
         this.name = name;

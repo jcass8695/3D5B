@@ -2,6 +2,7 @@ package com.google.firebase.udacity.friendlychat;
 
 import android.app.Activity;
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -10,6 +11,8 @@ import android.widget.TextView;
 import android.widget.Button;
 
 import com.bumptech.glide.Glide;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.List;
 
@@ -18,6 +21,9 @@ public class MessageAdapter extends ArrayAdapter<FriendlyMessage> {
         super(context, resource, objects);
     }
 
+    private static final String TAG = "MessageAdapter";
+    FirebaseDatabase mFirebaseDatabase;
+    DatabaseReference mMessagesDatabaseReference;
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
@@ -31,6 +37,7 @@ public class MessageAdapter extends ArrayAdapter<FriendlyMessage> {
 
         final FriendlyMessage message = getItem(position);
 
+        final String chatroom = message.getLocation();
         messageTextView.setVisibility(View.VISIBLE);
         messageTextView.setText(message.getText());
         authorTextView.setText(message.getName());
@@ -39,8 +46,12 @@ public class MessageAdapter extends ArrayAdapter<FriendlyMessage> {
         upvoteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mFirebaseDatabase = FirebaseDatabase.getInstance();
+                mMessagesDatabaseReference = mFirebaseDatabase.getReference().child(chatroom).child(message.getFbaseKey());
+
                 message.incrementUpvote();
                 upvoteTextView.setText(Integer.toString(message.getUpvote()));
+                mMessagesDatabaseReference.setValue(message);
             }
         });
 
