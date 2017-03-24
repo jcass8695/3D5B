@@ -121,7 +121,7 @@ public final class chat_database extends SQLiteOpenHelper{
         insert_CDmodule("Microprocessor Systems II");
         insert_CDmodule("Computer Networks");
         insert_CDmodule("Electronic Engineering Project B");
-    }*/
+    }
 
 
     public class queries{

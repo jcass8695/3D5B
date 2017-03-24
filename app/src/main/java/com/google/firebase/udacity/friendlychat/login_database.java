@@ -74,7 +74,7 @@ public final class login_database extends SQLiteOpenHelper {
         return true;
     }
 
-    /* maybe not needed yet
+
     //insert values to lecturer table
     public boolean insert_lecturer(String first_name, String last_name, String e_mail, String password){
         SQLiteDatabase db=this.getWritableDatabase();
@@ -101,7 +101,7 @@ public final class login_database extends SQLiteOpenHelper {
             return false;
     }
 
-    /*
+
     //lecturer login authentication
     public boolean check_lecturer(String e_mail, String password){
         SQLiteDatabase db=this.getWritableDatabase();
@@ -116,5 +116,5 @@ public final class login_database extends SQLiteOpenHelper {
         else
             cursor.close();
             return false;
-    };*/
+    };
 }
