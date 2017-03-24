@@ -132,6 +132,19 @@ public class ChatRoom extends AppCompatActivity {
 
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+                FriendlyMessage friendlyMessage = dataSnapshot.getValue(FriendlyMessage.class);
+
+                // Loop to find position of old message, remove it and replace with the upvoted message
+                for(int i = 0; i < mMessageAdapter.getCount(); i++)
+                {
+                    if(friendlyMessage.getFbaseKey().equals(mMessageAdapter.getItem(i).getFbaseKey()))
+                    {
+                        FriendlyMessage oldMessage = mMessageAdapter.getItem(i);
+                        mMessageAdapter.remove(oldMessage);
+                        mMessageAdapter.insert(friendlyMessage, i);
+                        break;
+                    }
+                }
             }
 
             @Override
