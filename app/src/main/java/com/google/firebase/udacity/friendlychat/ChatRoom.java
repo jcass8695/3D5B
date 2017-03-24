@@ -44,8 +44,9 @@ public class ChatRoom extends AppCompatActivity {
     private EditText mMessageEditText;
     private Button mSendButton;
     private Button mSignout;
-
+    private boolean inSession = true;
     private String mUsername, roomName;
+    private String userType;
 
     // Firebase database
     private FirebaseDatabase mFirebaseDatabase;
@@ -59,6 +60,7 @@ public class ChatRoom extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         mUsername = (String) extras.get("user_name");
         roomName = (String) extras.get("room_name");
+        inSession = (boolean) extras.get("session_status");
         //mUsername = JACK;
         setTitle(" Room - " + roomName);
         // References to Firebase realtime database.
@@ -152,4 +154,32 @@ public class ChatRoom extends AppCompatActivity {
 
 
     }
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main_menu, menu);
+
+
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.sign_out_menu:
+                Intent intent = new Intent(getApplicationContext(), Sign_in.class);
+                startActivityForResult(intent, 0);
+            case R.id.start_session:
+                if(inSession){
+                    inSession = false;
+                    mMessageListView.setVisibility(View.INVISIBLE);
+
+                }
+                else{
+                    inSession = true;
+                    mMessageListView.setVisibility(View.VISIBLE);
+                }
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
 }

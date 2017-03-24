@@ -57,13 +57,13 @@ public class MainActivity extends AppCompatActivity {
 
     private String mUsername;
 
-
+    private boolean inSession;
     private ListView listView;
     private ArrayAdapter<String> arrayAdapter;
     private ArrayList<String> list_of_rooms = new ArrayList<>();
     private String name;
     private DatabaseReference root = FirebaseDatabase.getInstance().getReference().getRoot();
-
+    private String userType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,7 +110,10 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), ChatRoom.class);
                 intent.putExtra("room_name",((TextView)view).getText().toString() );
                 intent.putExtra("user_name", mUsername);
+                intent.putExtra("session_status", inSession);
+                intent.putExtra("user_type", userType);
                 startActivity(intent);
+
             }
 
         });
