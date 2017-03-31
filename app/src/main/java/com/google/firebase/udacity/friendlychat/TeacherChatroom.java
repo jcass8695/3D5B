@@ -1,5 +1,6 @@
 package com.google.firebase.udacity.friendlychat;
 
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -24,6 +25,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
+
 
 /**
  * Created by evakn on 31/03/2017.
@@ -58,13 +60,8 @@ public class TeacherChatroom extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.teacher_chat_room);
 
-        if (userType.equals("student")){
-            setContentView(R.layout.chat_room);}
-        else {
-            setContentView(R.layout.teacher_chat_room);
-            mAnswerButton = (Button) findViewById(R.id.answerButton);
-            mBlockButton = (Button) findViewById(R.id.blockButton);}
 
         Bundle extras = getIntent().getExtras();
         mUsername = (String) extras.get("user_name");
@@ -84,16 +81,14 @@ public class TeacherChatroom extends AppCompatActivity {
         mMessageEditText = (EditText) findViewById(R.id.messageEditText);
         mSendButton = (Button) findViewById(R.id.sendButton);
         mSignout = (Button) findViewById(R.id.sign_out_menu);
-
+        mAnswerButton = (Button) findViewById(R.id.answerButton);
+        mBlockButton = (Button) findViewById(R.id.blockButton);
 
         //mMessageListView.setVisibility(View.INVISIBLE);
 
         // Initialize message ListView and its adapter
         List<FriendlyMessage> friendlyMessages = new ArrayList<>();
-        if (userType.equals("student")){
-            mMessageAdapter = new MessageAdapter(this, R.layout.item_message, friendlyMessages);}
-        else {
-            mMessageAdapter = new MessageAdapter(this, R.layout.teacher_item_message, friendlyMessages);    }
+        mMessageAdapter = new MessageAdapter(this, R.layout.teacher_item_message, friendlyMessages);
 
         mMessageListView.setAdapter(mMessageAdapter);
 

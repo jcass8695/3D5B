@@ -43,12 +43,12 @@ public class ChatRoom extends AppCompatActivity {
     private ProgressBar mProgressBar;
     private EditText mMessageEditText;
     private Button mSendButton;
-    private Button mAnswerButton;
-    private Button mBlockButton;
+    //private Button mAnswerButton;
+   // private Button mBlockButton;
     private Button mSignout;
     private boolean inSession = true;
     private String mUsername, roomName;
-    private String userType="student";
+    //private String userType="student";
 
     // Firebase database
     private FirebaseDatabase mFirebaseDatabase;
@@ -59,12 +59,8 @@ public class ChatRoom extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (userType.equals("student")){
-            setContentView(R.layout.chat_room);}
-        else {
-            setContentView(R.layout.teacher_chat_room);
-            mAnswerButton = (Button) findViewById(R.id.answerButton);
-            mBlockButton = (Button) findViewById(R.id.blockButton);}
+        setContentView(R.layout.chat_room);
+
 
         Bundle extras = getIntent().getExtras();
         mUsername = (String) extras.get("user_name");
@@ -90,10 +86,10 @@ public class ChatRoom extends AppCompatActivity {
 
         // Initialize message ListView and its adapter
         List<FriendlyMessage> friendlyMessages = new ArrayList<>();
-        if (userType.equals("student")){
-            mMessageAdapter = new MessageAdapter(this, R.layout.item_message, friendlyMessages);}
-        else {
-            mMessageAdapter = new MessageAdapter(this, R.layout.teacher_item_message, friendlyMessages);    }
+
+        mMessageAdapter = new MessageAdapter(this, R.layout.item_message, friendlyMessages);
+
+
 
         mMessageListView.setAdapter(mMessageAdapter);
 
@@ -136,22 +132,6 @@ public class ChatRoom extends AppCompatActivity {
                 Log.d(TAG, messageKey);
                 // Clear input box
                 mMessageEditText.setText("");
-            }
-        });
-        mAnswerButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), Answers.class);
-                startActivityForResult(intent, 0);
-
-            }
-        });
-        mBlockButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                //NEED TO DELETE MESSAGE HERE
-
             }
         });
 
@@ -202,16 +182,7 @@ public class ChatRoom extends AppCompatActivity {
             case R.id.sign_out_menu:
                 Intent intent = new Intent(getApplicationContext(), Sign_in.class);
                 startActivityForResult(intent, 0);
-            case R.id.start_session:
-                if(inSession){
-                    inSession = false;
-                    mMessageListView.setVisibility(View.INVISIBLE);
 
-                }
-                else{
-                    inSession = true;
-                    mMessageListView.setVisibility(View.VISIBLE);
-                }
             default:
                 return super.onOptionsItemSelected(item);
         }
