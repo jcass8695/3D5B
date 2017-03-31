@@ -43,10 +43,12 @@ public class ChatRoom extends AppCompatActivity {
     private ProgressBar mProgressBar;
     private EditText mMessageEditText;
     private Button mSendButton;
+    private Button mAnswerButton;
+    private Button mBlockButton;
     private Button mSignout;
     private boolean inSession = true;
     private String mUsername, roomName;
-    private String userType;
+    private String userType="student";
 
     // Firebase database
     private FirebaseDatabase mFirebaseDatabase;
@@ -56,7 +58,14 @@ public class ChatRoom extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.chat_room);
+
+        if (userType.equals("student")){
+            setContentView(R.layout.chat_room);}
+        else {
+            setContentView(R.layout.teacher_chat_room);
+            mAnswerButton = (Button) findViewById(R.id.answerButton);
+            mBlockButton = (Button) findViewById(R.id.blockButton);}
+
         Bundle extras = getIntent().getExtras();
         mUsername = (String) extras.get("user_name");
         roomName = (String) extras.get("room_name");
@@ -76,11 +85,16 @@ public class ChatRoom extends AppCompatActivity {
         mSendButton = (Button) findViewById(R.id.sendButton);
         mSignout = (Button) findViewById(R.id.sign_out_menu);
 
+
         //mMessageListView.setVisibility(View.INVISIBLE);
 
         // Initialize message ListView and its adapter
         List<FriendlyMessage> friendlyMessages = new ArrayList<>();
-        mMessageAdapter = new MessageAdapter(this, R.layout.item_message, friendlyMessages);
+        if (userType.equals("student")){
+            mMessageAdapter = new MessageAdapter(this, R.layout.item_message, friendlyMessages);}
+        else {
+            mMessageAdapter = new MessageAdapter(this, R.layout.teacher_item_message, friendlyMessages);    }
+
         mMessageListView.setAdapter(mMessageAdapter);
 
         // Initialize progress bar
@@ -124,6 +138,25 @@ public class ChatRoom extends AppCompatActivity {
                 mMessageEditText.setText("");
             }
         });
+        mAnswerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), Answers.class);
+                startActivityForResult(intent, 0);
+
+            }
+        });
+        mBlockButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                //NEED TO DELETE MESSAGE HERE
+
+            }
+        });
+
+
+
 
         mChildEventListener = new ChildEventListener() {
             @Override
@@ -138,6 +171,7 @@ public class ChatRoom extends AppCompatActivity {
 
             @Override
             public void onChildRemoved(DataSnapshot dataSnapshot) {
+
             }
 
             @Override
@@ -154,6 +188,7 @@ public class ChatRoom extends AppCompatActivity {
 
 
     }
+
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.main_menu, menu);
@@ -181,5 +216,4 @@ public class ChatRoom extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
-
 }
