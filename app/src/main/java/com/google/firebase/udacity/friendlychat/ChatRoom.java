@@ -1,7 +1,11 @@
 package com.google.firebase.udacity.friendlychat;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.media.MediaRecorder;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.InputFilter;
@@ -10,11 +14,13 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -22,6 +28,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,6 +59,15 @@ public class ChatRoom extends AppCompatActivity {
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mMessagesDatabaseReference;
     private ChildEventListener mChildEventListener;
+
+    //for audio recording
+    private RecordButton mRecordButton = null;
+    private MediaRecorder mRecorder;
+    private TextView mRecordLabel;
+    private String mFilename = null;
+    private static final String LOG_TAG = "Record_log";
+    private StorageReference mStorage;
+    private ProgressDialog mProgress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,6 +100,34 @@ public class ChatRoom extends AppCompatActivity {
 
         // Initialize progress bar
         mProgressBar.setVisibility(ProgressBar.INVISIBLE);
+
+        // Initialize everything for recording audio
+        mRecordLabel = (TextView) findViewById(R.id.RecordLabel)
+        mRecordButton = (Button) findViewById(R.id.RecordButton);
+        mFilename = Environment.getExternalStorageDirectory().getAbsolutePath();
+        mFilename += "/recorded_audio.3gp";
+        mStorage = FirebaseStorage.getInstance().getReference();
+        mProgress = new ProgressDialog(this);
+
+        //Record Audio function
+        mRecordButton.setOnTouchListener(new View.OnTouchListener(){
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+
+                if(motionEvent.getAction()== MotionEvent.ACTION_DOWN ){
+                    startRecording();
+
+                    mRecordLabel.setText("Recording...");
+
+                }
+                else if (motionEvent.getAction() == MotionEvent.ACTION_UP){
+                    stopRecording();
+                    mRecordLabel.setText("Finished Recording");
+                }
+
+                return false;
+            }
+        });
 
         // Enable Send button when there's text to send
         mMessageEditText.addTextChangedListener(new TextWatcher() {
@@ -164,5 +209,48 @@ public class ChatRoom extends AppCompatActivity {
 
 
 
+    }
+
+    // start recording audio
+    private void startRecording() {
+        mRecorder = new MediaRecorder();
+        mRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
+        mRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
+        mRecorder.setOutputFile(mFilename);
+        mRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
+
+        try {
+            mRecorder.prepare();
+        } catch (IOException e) {
+            Log.e(LOG_TAG, "prepare() failed");
+        }
+
+        mRecorder.start();
+    }
+
+    // stop recording audio
+    private void stopRecording() {
+        mRecorder.stop();
+        mRecorder.release();
+        mRecorder = null;
+
+        uploadAudio();
+    }
+
+    // upload audio to Firebase storage
+    private void uploadAudio() {
+        mProgress.setMessage("Uploading Recording...");
+        mProgress.show();
+
+        StorageReference filepath = mStorage.child("Audio").child("new_audio.3gp");
+
+        Uri uri = uri.fromFile(new File(mFilename));
+        filepath.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>(){
+            @Override
+            public void onSuccess (UploadTask.TaskSnapshot taskSnapshot) {
+                mProgress.dismiss();
+                mRecordLabel.setText("Upload Complete");
+            }
+        });
     }
 }

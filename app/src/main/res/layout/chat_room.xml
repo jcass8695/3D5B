@@ -40,6 +40,18 @@
             android:enabled="false"
             android:text="@string/send_button_label"/>
 
+        <Button
+            android:id="@+id/RecordButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:enabled="true"/>
+
+        <TextView
+            android:id="@+id/RecordLabel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            />
+
     </LinearLayout>
 
     <ProgressBar
