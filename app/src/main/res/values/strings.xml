@@ -6,4 +6,7 @@
     <string name="record_stop">Stop Recording</string>
     <string name="playback_start">Start Playback</string>
     <string name="playback_stop">Stop Playback</string>
+    <string name="rec">Rec</string>
+    <string name="upvotes">Upvotes</string>
+    <string name="upvote">Upvote</string>
 </resources>

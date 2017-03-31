@@ -8,14 +8,6 @@
         android:layout_height="60dp">
 
     <TextView
-        android:id="@+id/messageTextView"
-        android:layout_height="wrap_content"
-        android:layout_weight="0"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        tools:text="Message"
-        android:layout_width="160dp" />
-
-    <TextView
         android:id="@+id/nameTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -25,25 +17,48 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
+    <TextView
+        android:text="@string/upvotes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/upvoteTextView"
+        android:textSize="24sp"
+        android:layout_alignBaseline="@+id/upvoteButton"
+        android:layout_alignBottom="@+id/upvoteButton"
+        android:layout_toRightOf="@+id/messageTextView"
+        android:layout_toEndOf="@+id/messageTextView"
+        android:maxLines="1" />
+
     <Button
-        android:text="Upvote"
+        android:text="@string/upvote"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/upvoteButton"
         android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_toRightOf="@+id/upvoteTextView"
+        android:layout_toEndOf="@+id/upvoteTextView"
+        android:layout_marginLeft="11dp"
+        android:layout_marginStart="11dp" />
 
-    <TextView
-        android:text="Upvotes"
+    <Button
+        android:id="RecordButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/upvoteTextView"
-        android:numeric="integer"
-        android:textSize="24sp"
+        android:background="@android:drawable/ic_btn_speak_now"
         android:layout_alignBaseline="@+id/upvoteButton"
         android:layout_alignBottom="@+id/upvoteButton"
-        android:layout_toLeftOf="@+id/upvoteButton"
-        android:layout_toStartOf="@+id/upvoteButton" />
+        android:layout_toRightOf="@+id/upvoteButton"
+        android:layout_toEndOf="@+id/upvoteButton"
+        />
+
+    <TextView
+        android:id="@+id/messageTextView"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        tools:text="Message"
+        android:layout_width="160dp"
+        android:layout_alignBottom="@+id/upvoteTextView"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>
