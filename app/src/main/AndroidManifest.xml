@@ -8,6 +8,10 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+        <uses-permission android:name="android.permission.RECORD_AUDIO" />
+        <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
         <activity android:name=".Sign_in">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,6 +27,5 @@
         <activity android:name=".ChatRoom"/>
 
     </application>
-    <uses-permission android:name="android.permission.RECORD_AUDIO" />
 
 </manifest>
