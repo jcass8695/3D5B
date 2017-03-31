@@ -1,6 +1,7 @@
 package com.google.firebase.udacity.friendlychat;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import android.app.Activity;
@@ -23,6 +24,7 @@ import static java.security.AccessController.getContext;
 public class MessageAdapter extends BaseAdapter {
     private Context mContext;
     private List<FriendlyMessage> mMessages;
+
 
     public MessageAdapter(Context context, int resource, List<FriendlyMessage> objects) {
         super();

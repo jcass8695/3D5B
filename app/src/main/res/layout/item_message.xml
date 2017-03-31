@@ -50,10 +50,11 @@
         <TextView
             android:text="Upvotes"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:id="@+id/upvoteTextView"
             android:numeric="integer"
             android:textSize="24sp"
+            android:textColor="?attr/upvote_colour"
             android:layout_alignBaseline="@+id/upvoteButton"
             android:layout_alignBottom="@+id/upvoteButton"
             android:layout_toLeftOf="@+id/upvoteButton"

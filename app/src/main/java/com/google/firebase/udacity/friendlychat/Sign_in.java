@@ -31,17 +31,23 @@ public class Sign_in extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        //Theme Stuff////////////////////
         SharedPreferences sharedPref = getSharedPreferences("mypref", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
         String colour = sharedPref.getString("colour", "");
 
-        if(colour.equals("red")){
+        if(colour.equals("Red")){
             setTheme(R.style.RedThemeNoActionBar);
         }
-
+        if(colour.equals("Pink")){
+            setTheme(R.style.PinkThemeNoActionBar);
+        }
+        if(colour.equals("Blue Sky")){
+            setTheme(R.style.BlueThemeNoActionBar);
+        }
         else {
-        }////////////////////
+
+        }
+
         requestWindowFeature(Window.FEATURE_NO_TITLE);
 
         super.onCreate(savedInstanceState);
@@ -63,6 +69,7 @@ public class Sign_in extends AppCompatActivity {
         sign_in.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Toast.makeText(getBaseContext(), "Sign In Successful!", Toast.LENGTH_SHORT).show();
                 Intent intent_1 = new Intent(getApplicationContext(), MainActivity.class);
                 String name = e_mail.getText().toString();
                 intent_1.putExtra(mUsername, name);

@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -50,18 +51,23 @@ public class ChatRoom extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        //theme stuff
         SharedPreferences sharedPref = getSharedPreferences("mypref", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
         String colour = sharedPref.getString("colour", "");
 
-        if(colour.equals("red")){
+        if(colour.equals("Red")){
             setTheme(R.style.RedThemeWithActionBar);
         }
-
+        if(colour.equals("Pink")){
+            setTheme(R.style.PinkThemeWithActionBar);
+        }
+        if(colour.equals("Blue Sky")){
+            setTheme(R.style.BlueThemeWithActionBar);
+        }
         else {
 
-        }//////////////
+        }
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.chat_room);
         /////////////////////////////NEW STUFF
@@ -118,6 +124,8 @@ public class ChatRoom extends AppCompatActivity {
         mSendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Toast.makeText(getBaseContext(), "Message Sent!", Toast.LENGTH_SHORT).show();
+
                 // Create a new message object with text from the EditText widget and attach the username to it. Null for photo url
                 FriendlyMessage friendlyMessage = new FriendlyMessage(mMessageEditText.getText().toString(), mUsername);
                 mMessagesDatabaseReference.push().setValue(friendlyMessage);

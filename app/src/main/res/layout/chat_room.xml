@@ -5,17 +5,18 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation= "vertical"
+    android:background="?attr/background_pic"
     tools:context="com.google.firebase.udacity.friendlychat.MainActivity">
 
     <ListView
         android:id="@+id/messageListView"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_above="@+id/linearLayout"
         android:stackFromBottom="true"
         android:transcriptMode="alwaysScroll"
         android:divider="@null"
-        android:dividerHeight="0dp"
+        android:dividerHeight="10dp"
         android:paddingBottom="10dp"
         tools:listitem="@layout/item_message" />
 
@@ -34,15 +35,16 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_weight="1"
-            android:textColor="@color/black" />
+            android:backgroundTint="@color/blue"
+            android:layout_weight="100"
+            android:textColor="?attr/edittextchatroom" />
 
         <Button
             android:id="@+id/sendButton"
-            android:layout_width="wrap_content"
+            android:layout_width="47dp"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-            android:background="@drawable/send_button"
+            android:background="?attr/send_button"
             />
 
     </LinearLayout>

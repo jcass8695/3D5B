@@ -16,7 +16,7 @@ import android.widget.AdapterView.OnItemSelectedListener;
 
 import com.google.android.gms.common.api.GoogleApiClient;
 
-public class Sign_Up extends AppCompatActivity implements OnItemSelectedListener {
+public class Sign_Up extends AppCompatActivity {
     private database db;
     public static String NAME;
 
@@ -42,22 +42,28 @@ public class Sign_Up extends AppCompatActivity implements OnItemSelectedListener
         SharedPreferences.Editor editor = sharedPref.edit();
         String colour = sharedPref.getString("colour", "");
 
-        if(colour.equals("red")){
+        if(colour.equals("Red")){
             setTheme(R.style.RedThemeNoActionBar);
         }
-
+        if(colour.equals("Pink")){
+            setTheme(R.style.PinkThemeNoActionBar);
+        }
+        if(colour.equals("Blue Sky")){
+            setTheme(R.style.BlueThemeNoActionBar);
+        }
         else {
 
         }
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign__up);
 
-        Spinner spinner = (Spinner) findViewById(R.id.spinner);
+       /* Spinner spinner = (Spinner) findViewById(R.id.spinner);
         spinner.setOnItemSelectedListener(this);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.colours_array, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
+        spinner.setAdapter(adapter);*/
 
 
         first_name = (EditText) findViewById(R.id.first_name);
@@ -70,7 +76,8 @@ public class Sign_Up extends AppCompatActivity implements OnItemSelectedListener
         sign_up.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                Toast.makeText(getBaseContext(), "Sign Up Successful!", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                     String name = first_name.getText().toString();
                     intent.putExtra(NAME, name);
                     startActivityForResult(intent, 0);
@@ -78,7 +85,7 @@ public class Sign_Up extends AppCompatActivity implements OnItemSelectedListener
         });
     }
 
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+    /*public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         // On selecting a spinner item
         String item = parent.getItemAtPosition(position).toString();
 
@@ -86,18 +93,18 @@ public class Sign_Up extends AppCompatActivity implements OnItemSelectedListener
             //do nothing
         }
         else {
-
+            //selecting the theme
             SharedPreferences sharedPref = getSharedPreferences("mypref", Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = sharedPref.edit();
             editor.putString("colour", item);
             editor.apply();
             // Showing selected spinner item
-            //Toast.makeText(parent.getContext(), "Selected: " + sharedPref.getString("colour", ""), Toast.LENGTH_LONG).show();
+            Toast.makeText(parent.getContext(), "Selected: " + sharedPref.getString("theme", "")+" restart app", Toast.LENGTH_LONG).show();
 
         }
     }
     public void onNothingSelected(AdapterView<?> arg0) {
         // TODO Auto-generated method stub
-    }
+    }*/
 }
 
