@@ -173,6 +173,13 @@ public class ChatRoom extends AppCompatActivity {
 
 
     }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mMessagesDatabaseReference.removeEventListener(mChildEventListener);
+    }
+
     public static void sortList(int order){
         Collections.sort(friendlyMessages, new Sorter (order));
         mMessageAdapter.notifyDataSetChanged();
