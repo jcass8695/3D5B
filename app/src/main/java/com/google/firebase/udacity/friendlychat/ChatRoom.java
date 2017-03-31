@@ -23,6 +23,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -39,11 +42,12 @@ public class ChatRoom extends AppCompatActivity {
     public static final int DEFAULT_MSG_LENGTH_LIMIT = 1000;
 
     private ListView mMessageListView;
-    private MessageAdapter mMessageAdapter;
+    private static MessageAdapter mMessageAdapter;
     private ProgressBar mProgressBar;
     private EditText mMessageEditText;
     private Button mSendButton;
     private Button mSignout;
+    private static List<FriendlyMessage> friendlyMessages;
 
     private String mUsername, roomName;
 
@@ -51,6 +55,7 @@ public class ChatRoom extends AppCompatActivity {
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mMessagesDatabaseReference;
     private ChildEventListener mChildEventListener;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,7 +82,7 @@ public class ChatRoom extends AppCompatActivity {
         //mMessageListView.setVisibility(View.INVISIBLE);
 
         // Initialize message ListView and its adapter
-        List<FriendlyMessage> friendlyMessages = new ArrayList<>();
+        friendlyMessages = new ArrayList<>();
         mMessageAdapter = new MessageAdapter(this, R.layout.item_message, friendlyMessages);
         mMessageListView.setAdapter(mMessageAdapter);
 
@@ -132,6 +137,7 @@ public class ChatRoom extends AppCompatActivity {
 
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+                sortList(1);
             }
 
             @Override
@@ -152,4 +158,26 @@ public class ChatRoom extends AppCompatActivity {
 
 
     }
+    public static void sortList(int order){
+        Collections.sort(friendlyMessages, new Sorter (order));
+        mMessageAdapter.notifyDataSetChanged();
+    }
+
+    static class Sorter implements Comparator<FriendlyMessage>{
+        int order = -1;
+        Sorter(int order){
+            this.order = order;
+        }
+        public int compare(FriendlyMessage message1, FriendlyMessage message2){
+            if(message1.getUpvote() > message2.getUpvote()) {
+                return (-1 * order);
+            }
+
+            else
+                return order;
+        }
+    }
 }
+
+
+
