@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.google.firebase.udacity.friendlychat.Sign_in">
+
+    <TextView
+        android:text="Chat Room"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/text_1"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display2"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:ems="10"
+        android:layout_below="@+id/e_mail"
+        android:layout_alignRight="@+id/text_1"
+        android:layout_alignEnd="@+id/text_1"
+        android:layout_marginTop="12dp"
+        android:id="@+id/password"
+        android:hint="Password" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:layout_marginTop="54dp"
+        android:id="@+id/e_mail"
+        android:layout_below="@+id/text_1"
+        android:layout_centerHorizontal="true"
+        android:hint="E-Mail" />
+
+    <TextView
+        android:text=" Sign Up"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/sign_up"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:layout_alignBaseline="@+id/text_2"
+        android:layout_alignBottom="@+id/text_2"
+        android:layout_toRightOf="@+id/text_2"
+        android:layout_toEndOf="@+id/text_2"
+        android:textColor="@android:color/holo_blue_dark" />
+
+    <TextView
+        android:text="Do not have an account?"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="29dp"
+        android:id="@+id/text_2"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:layout_below="@+id/sign_in"
+        android:layout_alignLeft="@+id/password"
+        android:layout_alignStart="@+id/password" />
+
+    <Button
+        android:text="Sign In"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/sign_in"
+        style="@android:style/Widget.Button"
+        android:layout_marginTop="25dp"
+        android:layout_below="@+id/password"
+        android:onClick="onClick"
+        android:layout_centerHorizontal="true" />
+
+</RelativeLayout>
