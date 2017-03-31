@@ -107,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l){
-                Intent intent = new Intent(getApplicationContext(), ChatRoom.class);
+                Intent intent = new Intent(getApplicationContext(), TeacherChatroom.class);
                 intent.putExtra("room_name",((TextView)view).getText().toString() );
                 intent.putExtra("user_name", mUsername);
                 intent.putExtra("session_status", inSession);

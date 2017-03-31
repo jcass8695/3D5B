@@ -50,7 +50,7 @@ public class TeacherChatroom extends AppCompatActivity {
     private Button mSignout;
     private boolean inSession = true;
     private String mUsername, roomName;
-    private String userType="student";
+
 
     // Firebase database
     private FirebaseDatabase mFirebaseDatabase;
@@ -187,8 +187,6 @@ public class TeacherChatroom extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.main_menu, menu);
-
-
         return true;
     }
     @Override
