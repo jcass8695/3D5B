@@ -1,6 +1,8 @@
 package com.google.firebase.udacity.friendlychat;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
@@ -15,6 +17,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -66,6 +69,7 @@ public class ChatRoom extends AppCompatActivity {
         roomName = (String) extras.get("room_name");
         //mUsername = JACK;
         setTitle(" Room - " + roomName);
+
         // References to Firebase realtime database.
         // mFirebaseDatabase = access to root of database, mMessagesDatabaseReference = access to "messages" portion of database
         mFirebaseDatabase = FirebaseDatabase.getInstance();
@@ -88,6 +92,21 @@ public class ChatRoom extends AppCompatActivity {
 
         // Initialize progress bar
         mProgressBar.setVisibility(ProgressBar.INVISIBLE);
+
+        // GUI MERGE
+        SharedPreferences sharedPref = getSharedPreferences("mypref", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        String colour = sharedPref.getString("colour", "");
+
+        if(colour.equals("Red")){
+            setTheme(R.style.RedThemeWithActionBar);
+        }
+        if(colour.equals("Pink")){
+            setTheme(R.style.PinkThemeWithActionBar);
+        }
+        if(colour.equals("Blue Sky")){
+            setTheme(R.style.BlueThemeWithActionBar);
+        }
 
         // Enable Send button when there's text to send
         mMessageEditText.addTextChangedListener(new TextWatcher() {

@@ -15,7 +15,9 @@
  */
 package com.google.firebase.udacity.friendlychat;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
@@ -48,8 +50,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import static android.R.id.list;
+import static com.google.firebase.udacity.friendlychat.R.id.spinner;
 import static com.google.firebase.udacity.friendlychat.Sign_in.mUsername;
-
+import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
