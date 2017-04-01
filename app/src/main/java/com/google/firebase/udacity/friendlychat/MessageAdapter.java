@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Button;
@@ -31,16 +32,16 @@ public class MessageAdapter extends ArrayAdapter<FriendlyMessage> {
         }
 
         TextView messageTextView = (TextView) convertView.findViewById(R.id.messageTextView);
-        TextView authorTextView = (TextView) convertView.findViewById(R.id.nameTextView);
+        //TextView authorTextView = (TextView) convertView.findViewById(R.id.nameTextView);
         final TextView upvoteTextView = (TextView) convertView.findViewById(R.id.upvoteTextView);
-        Button upvoteButton = (Button) convertView.findViewById(R.id.upvoteButton);
+        ImageButton upvoteButton = (ImageButton) convertView.findViewById(R.id.upvoteButton);
 
         final FriendlyMessage message = getItem(position);
 
         final String chatroom = message.getLocation();
         messageTextView.setVisibility(View.VISIBLE);
         messageTextView.setText(message.getText());
-        authorTextView.setText(message.getName());
+        //authorTextView.setText(message.getName());
         upvoteTextView.setText(Integer.toString(message.getUpvote()));
 
         upvoteButton.setOnClickListener(new View.OnClickListener() {
@@ -54,8 +55,6 @@ public class MessageAdapter extends ArrayAdapter<FriendlyMessage> {
                 mMessagesDatabaseReference.setValue(message);
             }
         });
-
-
         return convertView;
     }
 }

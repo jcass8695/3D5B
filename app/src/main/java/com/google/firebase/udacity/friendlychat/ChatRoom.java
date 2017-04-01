@@ -134,6 +134,7 @@ public class ChatRoom extends AppCompatActivity {
         mSendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Toast.makeText(getBaseContext(), "Message Sent!", Toast.LENGTH_SHORT).show();
                 // Create a new message object with text from the EditText widget and attach the username to it. Null for photo url
                 FriendlyMessage friendlyMessage = new FriendlyMessage(mMessageEditText.getText().toString(), mUsername, roomName);
 
@@ -188,17 +189,16 @@ public class ChatRoom extends AppCompatActivity {
         };
         // Attach childEventListener to the "messages" section of the dbase
         mMessagesDatabaseReference.addChildEventListener(mChildEventListener);
-
-
-
     }
 
+    // VERY IMPORTANT, prevents multiple instatiations of the same listener, resulting in multiple messages being sent
     @Override
     protected void onPause() {
         super.onPause();
         mMessagesDatabaseReference.removeEventListener(mChildEventListener);
     }
 
+    // Yash's fantastic sorting of messages by upvote count
     public static void sortList(int order){
         Collections.sort(friendlyMessages, new Sorter (order));
         mMessageAdapter.notifyDataSetChanged();
@@ -216,6 +216,26 @@ public class ChatRoom extends AppCompatActivity {
 
             else
                 return order;
+        }
+    }
+
+    // GUI stuff, whose function I do not know
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.sign_out_menu:
+                Intent intent = new Intent(getApplicationContext(), Sign_in.class);
+                startActivityForResult(intent, 0);
+
+            default:
+                return super.onOptionsItemSelected(item);
         }
     }
 }

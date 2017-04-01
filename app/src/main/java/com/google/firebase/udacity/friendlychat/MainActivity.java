@@ -33,6 +33,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.google.firebase.database.ChildEventListener;
@@ -57,12 +58,7 @@ import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
-
-
-
     private String mUsername;
-
-
     private ListView listView;
     private ArrayAdapter<String> arrayAdapter;
     private ArrayList<String> list_of_rooms = new ArrayList<>();
@@ -74,18 +70,34 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         Bundle extras = getIntent().getExtras();
         mUsername = (String) extras.get(mUsername);
 
+        setTitle("Modules");
         listView = (ListView) findViewById(R.id.moduleListView);
-
-        arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,
-                list_of_rooms);
-
+        arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, list_of_rooms);
         listView.setAdapter(arrayAdapter);
         final String modules[] = new String[]{"3C1", "3C2", "3D1", "3D2", "3D5B"};
 
+        // GUI STUFF
+        SharedPreferences sharedPref = getSharedPreferences("mypref", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        String colour = sharedPref.getString("colour", "");
+        String text = sharedPref.getString("text", "");
+        Toast.makeText(getApplicationContext(), "text:" + text, Toast.LENGTH_LONG);
+        if(colour.equals("Red")){
+            setTheme(R.style.RedThemeWithActionBar);
+        }
+        if(colour.equals("Pink")){
+            setTheme(R.style.PinkThemeWithActionBar);
+        }
+        if(colour.equals("Blue Sky")){
+            setTheme(R.style.BlueThemeWithActionBar);
+        }
+        else {
 
+        }
 
        root.addListenerForSingleValueEvent(new ValueEventListener() {
            @Override
@@ -98,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
                }
                list_of_rooms.clear();
                list_of_rooms.addAll(set);
-
+                //Collections.sort(list_of_rooms);
                arrayAdapter.notifyDataSetChanged();
            }
 
@@ -107,7 +119,6 @@ public class MainActivity extends AppCompatActivity {
 
            }
        });
-
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
@@ -134,7 +145,10 @@ public class MainActivity extends AppCompatActivity {
             case R.id.sign_out_menu:
                 Intent intent = new Intent(getApplicationContext(), Sign_in.class);
                 startActivityForResult(intent, 0);
-
+            case R.id.settings_menu:
+                Toast.makeText(getApplicationContext(), "selected settings", Toast.LENGTH_SHORT);
+                Intent intent2 = new Intent(getApplicationContext(), Settings_Page.class);
+                startActivityForResult(intent2, 0);
             default:
                 return super.onOptionsItemSelected(item);
         }
