@@ -65,9 +65,8 @@ public class ChatRoom extends AppCompatActivity {
     private ChildEventListener mChildEventListener;
 
     //for audio recording
-    private RecordButton mRecordButton = null;
+    private Button mRecordButton = null;
     private MediaRecorder mRecorder;
-    private TextView mRecordLabel;
     private String mFilename = null;
     private static final String LOG_TAG = "Record_log";
     private StorageReference mStorage;
@@ -106,7 +105,6 @@ public class ChatRoom extends AppCompatActivity {
         mProgressBar.setVisibility(ProgressBar.INVISIBLE);
 
         // Initialize everything for recording audio
-        mRecordLabel = (TextView) findViewById(R.id.RecordLabel)
         mRecordButton = (Button) findViewById(R.id.RecordButton);
         mFilename = Environment.getExternalStorageDirectory().getAbsolutePath();
         mFilename += "/recorded_audio.3gp";
@@ -120,13 +118,9 @@ public class ChatRoom extends AppCompatActivity {
 
                 if(motionEvent.getAction()== MotionEvent.ACTION_DOWN ){
                     startRecording();
-
-                    mRecordLabel.setText("Recording...");
-
                 }
                 else if (motionEvent.getAction() == MotionEvent.ACTION_UP){
                     stopRecording();
-                    mRecordLabel.setText("Finished Recording");
                 }
 
                 return false;
@@ -248,12 +242,11 @@ public class ChatRoom extends AppCompatActivity {
 
         StorageReference filepath = mStorage.child("Audio").child("new_audio.3gp");
 
-        Uri uri = uri.fromFile(new File(mFilename));
+        Uri uri = Uri.fromFile(new File(mFilename));
         filepath.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>(){
             @Override
             public void onSuccess (UploadTask.TaskSnapshot taskSnapshot) {
                 mProgress.dismiss();
-                mRecordLabel.setText("Upload Complete");
             }
         });
     }

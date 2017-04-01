@@ -15,6 +15,17 @@
  */
 package com.google.firebase.udacity.friendlychat;
 
+import android.app.ProgressDialog;
+import android.media.MediaRecorder;
+import android.os.Environment;
+import android.view.MotionEvent;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
+
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+
 import java.util.ArrayList;
 
 public class FriendlyMessage {
