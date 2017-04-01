@@ -68,18 +68,6 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        Bundle extras = getIntent().getExtras();
-        mUsername = (String) extras.get(mUsername);
-
-        setTitle("Modules");
-        listView = (ListView) findViewById(R.id.moduleListView);
-        arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, list_of_rooms);
-        listView.setAdapter(arrayAdapter);
-        final String modules[] = new String[]{"3C1", "3C2", "3D1", "3D2", "3D5B"};
-
         // GUI STUFF
         SharedPreferences sharedPref = getSharedPreferences("mypref", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
@@ -99,7 +87,19 @@ public class MainActivity extends AppCompatActivity {
 
         }
 
-       root.addListenerForSingleValueEvent(new ValueEventListener() {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        Bundle extras = getIntent().getExtras();
+        mUsername = (String) extras.get(mUsername);
+
+        setTitle("Modules");
+        listView = (ListView) findViewById(R.id.moduleListView);
+        arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, list_of_rooms);
+        listView.setAdapter(arrayAdapter);
+        final String modules[] = new String[]{"3C1", "3C2", "3D1", "3D2", "3D5B"};
+
+        root.addListenerForSingleValueEvent(new ValueEventListener() {
            @Override
            public void onDataChange(DataSnapshot dataSnapshot) {
                Set<String> set = new HashSet<String>();

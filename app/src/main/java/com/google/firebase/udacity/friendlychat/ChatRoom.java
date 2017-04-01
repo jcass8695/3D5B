@@ -62,6 +62,21 @@ public class ChatRoom extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        // GUI MERGE
+        SharedPreferences sharedPref = getSharedPreferences("mypref", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        String colour = sharedPref.getString("colour", "");
+
+        if(colour.equals("Red")){
+            setTheme(R.style.RedThemeWithActionBar);
+        }
+        if(colour.equals("Pink")){
+            setTheme(R.style.PinkThemeWithActionBar);
+        }
+        if(colour.equals("Blue Sky")){
+            setTheme(R.style.BlueThemeWithActionBar);
+        }
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.chat_room);
         Bundle extras = getIntent().getExtras();
@@ -92,21 +107,6 @@ public class ChatRoom extends AppCompatActivity {
 
         // Initialize progress bar
         mProgressBar.setVisibility(ProgressBar.INVISIBLE);
-
-        // GUI MERGE
-        SharedPreferences sharedPref = getSharedPreferences("mypref", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPref.edit();
-        String colour = sharedPref.getString("colour", "");
-
-        if(colour.equals("Red")){
-            setTheme(R.style.RedThemeWithActionBar);
-        }
-        if(colour.equals("Pink")){
-            setTheme(R.style.PinkThemeWithActionBar);
-        }
-        if(colour.equals("Blue Sky")){
-            setTheme(R.style.BlueThemeWithActionBar);
-        }
 
         // Enable Send button when there's text to send
         mMessageEditText.addTextChangedListener(new TextWatcher() {
