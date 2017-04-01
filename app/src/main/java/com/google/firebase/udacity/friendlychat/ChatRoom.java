@@ -6,6 +6,7 @@ import android.media.MediaRecorder;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.InputFilter;
@@ -22,6 +23,7 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -71,6 +73,7 @@ public class ChatRoom extends AppCompatActivity {
     private static final String LOG_TAG = "Record_log";
     private StorageReference mStorage;
     private ProgressDialog mProgress;
+    private int mCounter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,9 +110,11 @@ public class ChatRoom extends AppCompatActivity {
         // Initialize everything for recording audio
         mRecordButton = (Button) findViewById(R.id.RecordButton);
         mFilename = Environment.getExternalStorageDirectory().getAbsolutePath();
-        mFilename += "/recorded_audio.3gp";
+        mCounter = 0;
+        mFilename += "/recorded_audio_"+mCounter+".3gp";
         mStorage = FirebaseStorage.getInstance().getReference();
         mProgress = new ProgressDialog(this);
+
 
         //Record Audio function
         mRecordButton.setOnTouchListener(new View.OnTouchListener(){
@@ -240,13 +245,20 @@ public class ChatRoom extends AppCompatActivity {
         mProgress.setMessage("Uploading Recording...");
         mProgress.show();
 
-        StorageReference filepath = mStorage.child("Audio").child("new_audio.3gp");
+        StorageReference filepath = mStorage.child("Audio").child("new_audio_"+mCounter+".3gp");
 
         Uri uri = Uri.fromFile(new File(mFilename));
-        filepath.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>(){
+        filepath.putFile(uri).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                //Handle unsuccessful uploads
+            }
+        })
+        .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>(){
             @Override
             public void onSuccess (UploadTask.TaskSnapshot taskSnapshot) {
                 mProgress.dismiss();
+                mCounter+=1;
             }
         });
     }
