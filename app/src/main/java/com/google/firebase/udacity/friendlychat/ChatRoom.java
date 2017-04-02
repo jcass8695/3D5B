@@ -78,6 +78,23 @@ public class ChatRoom extends AppCompatActivity {
     private StorageReference mStorage;
     private ProgressDialog mProgress;
     private int mCounter;
+    
+    // Requesting permission to RECORD_AUDIO
+    private static final int REQUEST_RECORD_AUDIO_PERMISSION = 200;
+    private boolean permissionToRecordAccepted = false;
+    private String [] permissions = {android.Manifest.permission.RECORD_AUDIO};
+    
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode){
+            case REQUEST_RECORD_AUDIO_PERMISSION:
+                permissionToRecordAccepted  = grantResults[0] == PackageManager.PERMISSION_GRANTED;
+                break;
+        }
+        if (!permissionToRecordAccepted ) finish();
+
+    }
 
     // Requesting permission to RECORD_AUDIO
     private static final int REQUEST_RECORD_AUDIO_PERMISSION = 200;
@@ -135,6 +152,8 @@ public class ChatRoom extends AppCompatActivity {
         mFilename += "/recorded_audio_"+mCounter+".3gp";
         mStorage = FirebaseStorage.getInstance().getReference();
         mProgress = new ProgressDialog(this);
+        
+        ActivityCompat.requestPermissions(this, permissions, REQUEST_RECORD_AUDIO_PERMISSION);
 
         ActivityCompat.requestPermissions(this, permissions, REQUEST_RECORD_AUDIO_PERMISSION);
 
