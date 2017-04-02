@@ -3,6 +3,7 @@ package com.google.firebase.udacity.friendlychat;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.media.MediaRecorder;
 import android.net.Uri;
 import android.os.Bundle;
@@ -25,6 +26,7 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.ChildEventListener;
@@ -144,9 +146,11 @@ public class ChatRoom extends AppCompatActivity {
 
                 if(motionEvent.getAction()== MotionEvent.ACTION_DOWN ){
                     startRecording();
+                    mMessageEditText.setHint("Recording...");
                 }
                 else if (motionEvent.getAction() == MotionEvent.ACTION_UP){
                     stopRecording();
+                    mMessageEditText.setHint("");
                 }
 
                 return false;
