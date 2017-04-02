@@ -131,15 +131,12 @@ public class ChatRoom extends AppCompatActivity {
         // Initialize everything for recording audio
         mRecordButton = (Button) findViewById(R.id.RecordButton);
         mFilename = Environment.getExternalStorageDirectory().getAbsolutePath();
-        mCounter = 0;
-        mFilename += "/recorded_audio_"+mCounter+".3gp";
+        mCounter = 1;
+        mFilename += "/"+roomName+"_"+mCounter+".3gp";
         mStorage = FirebaseStorage.getInstance().getReference();
         mProgress = new ProgressDialog(this);
-        
-        ActivityCompat.requestPermissions(this, permissions, REQUEST_RECORD_AUDIO_PERMISSION);
 
         ActivityCompat.requestPermissions(this, permissions, REQUEST_RECORD_AUDIO_PERMISSION);
-
 
         //Record Audio function
         mRecordButton.setOnTouchListener(new View.OnTouchListener(){
@@ -237,43 +234,49 @@ public class ChatRoom extends AppCompatActivity {
         // Attach childEventListener to the "messages" section of the dbase
         mMessagesDatabaseReference.addChildEventListener(mChildEventListener);
 
-
-
     }
 
     // start recording audio
     private void startRecording() {
+        //initialise everything
         mRecorder = new MediaRecorder();
         mRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
         mRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
         mRecorder.setOutputFile(mFilename);
         mRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
 
+        //include exception handler
         try {
             mRecorder.prepare();
         } catch (IOException e) {
             Log.e(LOG_TAG, "prepare() failed");
         }
 
+        //start recording
         mRecorder.start();
     }
 
     // stop recording audio
     private void stopRecording() {
+        //finish recording, release memory
         mRecorder.stop();
         mRecorder.release();
         mRecorder = null;
 
+        //upload recording to storage
         uploadAudio();
     }
 
     // upload audio to Firebase storage
     private void uploadAudio() {
+        //show upload progress
         mProgress.setMessage("Uploading Recording...");
         mProgress.show();
 
-        StorageReference filepath = mStorage.child("Audio").child("new_audio_"+mCounter+".3gp");
+        //get storage path
+        final StorageReference filepath = mStorage.child("Audio").child(roomName).child(mCounter+".3gp");
 
+        //upload the file
         Uri uri = Uri.fromFile(new File(mFilename));
         filepath.putFile(uri).addOnFailureListener(new OnFailureListener() {
             @Override
@@ -284,9 +287,25 @@ public class ChatRoom extends AppCompatActivity {
                 .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>(){
                     @Override
                     public void onSuccess (UploadTask.TaskSnapshot taskSnapshot) {
+                        //Handle successful uploads
+
+                        //send URL as message
+                        FriendlyMessage friendlyMessage = new FriendlyMessage(filepath.getPath(), mUsername, roomName);
+
+                        String messageKey = mMessagesDatabaseReference.push().getKey();
+                        friendlyMessage.setFbaseKey(messageKey);
+                        mMessagesDatabaseReference.child(messageKey).setValue(friendlyMessage);
+
+                        Log.d(TAG, messageKey);
+
+                        // dismiss upload progress
                         mProgress.dismiss();
+
+                        //increment counter
                         mCounter+=1;
                     }
                 });
     }
+
+
 }
