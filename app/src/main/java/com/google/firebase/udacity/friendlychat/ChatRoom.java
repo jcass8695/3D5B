@@ -2,11 +2,13 @@ package com.google.firebase.udacity.friendlychat;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.media.MediaRecorder;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.InputFilter;
@@ -75,6 +77,23 @@ public class ChatRoom extends AppCompatActivity {
     private ProgressDialog mProgress;
     private int mCounter;
 
+    // Requesting permission to RECORD_AUDIO
+    private static final int REQUEST_RECORD_AUDIO_PERMISSION = 200;
+    private boolean permissionToRecordAccepted = false;
+    private String [] permissions = {android.Manifest.permission.RECORD_AUDIO};
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode){
+            case REQUEST_RECORD_AUDIO_PERMISSION:
+                permissionToRecordAccepted  = grantResults[0] == PackageManager.PERMISSION_GRANTED;
+                break;
+        }
+        if (!permissionToRecordAccepted ) finish();
+
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -114,6 +133,8 @@ public class ChatRoom extends AppCompatActivity {
         mFilename += "/recorded_audio_"+mCounter+".3gp";
         mStorage = FirebaseStorage.getInstance().getReference();
         mProgress = new ProgressDialog(this);
+
+        ActivityCompat.requestPermissions(this, permissions, REQUEST_RECORD_AUDIO_PERMISSION);
 
 
         //Record Audio function
@@ -254,12 +275,12 @@ public class ChatRoom extends AppCompatActivity {
                 //Handle unsuccessful uploads
             }
         })
-        .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>(){
-            @Override
-            public void onSuccess (UploadTask.TaskSnapshot taskSnapshot) {
-                mProgress.dismiss();
-                mCounter+=1;
-            }
-        });
+                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>(){
+                    @Override
+                    public void onSuccess (UploadTask.TaskSnapshot taskSnapshot) {
+                        mProgress.dismiss();
+                        mCounter+=1;
+                    }
+                });
     }
 }
