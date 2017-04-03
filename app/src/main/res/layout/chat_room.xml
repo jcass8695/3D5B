@@ -37,7 +37,8 @@
             android:layout_gravity="center_vertical"
             android:backgroundTint="@color/blue"
             android:layout_weight="100"
-            android:textColor="?attr/edittextchatroom" />
+            android:textColor="?attr/edittextchatroom"
+            android:textColorHint="#20f200" />
 
         <Button
             android:id="@+id/sendButton"
@@ -46,6 +47,13 @@
             android:layout_gravity="bottom"
             android:background="?attr/send_button"
             />
+
+        <Button
+            android:id="@+id/RecordButton"
+            android:layout_width="55dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="bottom"
+            android:background="@android:drawable/presence_audio_online" />
 
     </LinearLayout>
 

@@ -1,9 +1,16 @@
 package com.google.firebase.udacity.friendlychat;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.media.MediaRecorder;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.InputFilter;
@@ -12,6 +19,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -19,12 +27,20 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageMetadata;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -59,6 +75,32 @@ public class ChatRoom extends AppCompatActivity {
     private DatabaseReference mMessagesDatabaseReference;
     private ChildEventListener mChildEventListener;
 
+    //for audio recording
+    private Button mRecordButton = null;
+    private MediaRecorder mRecorder;
+    private String mFilename = null;
+    private static final String LOG_TAG = "Record_log";
+    private StorageReference mStorage;
+    private ProgressDialog mProgress;
+    private int mCounter;
+
+    // Requesting permission to RECORD_AUDIO
+    private static final int REQUEST_RECORD_AUDIO_PERMISSION = 200;
+    private boolean permissionToRecordAccepted = false;
+    private String[] permissions = {android.Manifest.permission.RECORD_AUDIO};
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode) {
+            case REQUEST_RECORD_AUDIO_PERMISSION:
+                permissionToRecordAccepted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
+                break;
+        }
+        if (!permissionToRecordAccepted) finish();
+
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,13 +109,13 @@ public class ChatRoom extends AppCompatActivity {
         SharedPreferences.Editor editor = sharedPref.edit();
         String colour = sharedPref.getString("colour", "");
 
-        if(colour.equals("Red")){
+        if (colour.equals("Red")) {
             setTheme(R.style.RedThemeWithActionBar);
         }
-        if(colour.equals("Pink")){
+        if (colour.equals("Pink")) {
             setTheme(R.style.PinkThemeWithActionBar);
         }
-        if(colour.equals("Blue Sky")){
+        if (colour.equals("Blue Sky")) {
             setTheme(R.style.BlueThemeWithActionBar);
         }
 
@@ -108,6 +150,33 @@ public class ChatRoom extends AppCompatActivity {
         // Initialize progress bar
         mProgressBar.setVisibility(ProgressBar.INVISIBLE);
 
+        // Initialize everything for recording audio
+        mRecordButton = (Button) findViewById(R.id.RecordButton);
+        mFilename = Environment.getExternalStorageDirectory().getAbsolutePath();
+        mCounter = 1;
+        mFilename += "/" + roomName + "_" + mCounter + ".3gp";
+        mStorage = FirebaseStorage.getInstance().getReference();
+        mProgress = new ProgressDialog(this);
+
+        ActivityCompat.requestPermissions(this, permissions, REQUEST_RECORD_AUDIO_PERMISSION);
+
+        //Record Audio function
+        mRecordButton.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+
+                if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
+                    startRecording();
+                    mMessageEditText.setHint("Recording...");
+                } else if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
+                    stopRecording();
+                    mMessageEditText.setHint("");
+                }
+
+                return false;
+            }
+        });
+
         // Enable Send button when there's text to send
         mMessageEditText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -134,9 +203,10 @@ public class ChatRoom extends AppCompatActivity {
         mSendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                final String mType = "text";
                 Toast.makeText(getBaseContext(), "Message Sent!", Toast.LENGTH_SHORT).show();
                 // Create a new message object with text from the EditText widget and attach the username to it. Null for photo url
-                FriendlyMessage friendlyMessage = new FriendlyMessage(mMessageEditText.getText().toString(), mUsername, roomName);
+                FriendlyMessage friendlyMessage = new FriendlyMessage(mMessageEditText.getText().toString(), mUsername, mType, roomName);
 
                 String messageKey = mMessagesDatabaseReference.push().getKey();
                 friendlyMessage.setFbaseKey(messageKey);
@@ -162,10 +232,8 @@ public class ChatRoom extends AppCompatActivity {
                 FriendlyMessage friendlyMessage = dataSnapshot.getValue(FriendlyMessage.class);
 
                 // Loop to find position of old message, remove it and replace with the upvoted message
-                for(int i = 0; i < mMessageAdapter.getCount(); i++)
-                {
-                    if(friendlyMessage.getFbaseKey().equals(mMessageAdapter.getItem(i).getFbaseKey()))
-                    {
+                for (int i = 0; i < mMessageAdapter.getCount(); i++) {
+                    if (friendlyMessage.getFbaseKey().equals(mMessageAdapter.getItem(i).getFbaseKey())) {
                         FriendlyMessage oldMessage = mMessageAdapter.getItem(i);
                         mMessageAdapter.remove(oldMessage);
                         mMessageAdapter.insert(friendlyMessage, i);
@@ -199,22 +267,22 @@ public class ChatRoom extends AppCompatActivity {
     }
 
     // Yash's fantastic sorting of messages by upvote count
-    public static void sortList(int order){
-        Collections.sort(friendlyMessages, new Sorter (order));
+    public static void sortList(int order) {
+        Collections.sort(friendlyMessages, new Sorter(order));
         mMessageAdapter.notifyDataSetChanged();
     }
 
-    static class Sorter implements Comparator<FriendlyMessage>{
+    static class Sorter implements Comparator<FriendlyMessage> {
         int order = -1;
-        Sorter(int order){
+
+        Sorter(int order) {
             this.order = order;
         }
-        public int compare(FriendlyMessage message1, FriendlyMessage message2){
-            if(message1.getUpvote() > message2.getUpvote()) {
-                return (-1 * order);
-            }
 
-            else
+        public int compare(FriendlyMessage message1, FriendlyMessage message2) {
+            if (message1.getUpvote() > message2.getUpvote()) {
+                return (-1 * order);
+            } else
                 return order;
         }
     }
@@ -237,6 +305,81 @@ public class ChatRoom extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    // start recording audio
+    private void startRecording() {
+        //initialise everything
+        mRecorder = new MediaRecorder();
+        mRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
+        mRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
+        mRecorder.setOutputFile(mFilename);
+        mRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
+
+        //include exception handler
+        try {
+            mRecorder.prepare();
+        } catch (IOException e) {
+            Log.e(LOG_TAG, "prepare() failed");
+        }
+
+        //start recording
+        mRecorder.start();
+    }
+
+    // stop recording audio
+    private void stopRecording() {
+        //finish recording, release memory
+        mRecorder.stop();
+        mRecorder.release();
+        mRecorder = null;
+
+        //upload recording to storage
+        uploadAudio();
+    }
+
+    // upload audio to Firebase storage
+    private void uploadAudio() {
+        //show upload progress
+        mProgress.setMessage("Uploading Recording...");
+        mProgress.show();
+
+        //get storage path
+        final StorageReference filepath = mStorage.child("Audio").child(roomName).child(mCounter + ".3gp");
+        StorageMetadata metadata = new StorageMetadata.Builder().setContentType("audio/3gpp").build();
+        final String mURL = filepath.toString();
+        final String mType = "audio/3gpp";
+
+        //upload the file
+        Uri uri = Uri.fromFile(new File(mFilename));
+        filepath.putFile(uri, metadata).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                //Handle unsuccessful uploads
+            }
+        })
+                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        //Handle successful uploads
+
+                        //send URL as message
+
+                        FriendlyMessage friendlyMessage = new FriendlyMessage(mURL, mUsername, mType, roomName);
+
+                        String messageKey = mMessagesDatabaseReference.push().getKey();
+                        friendlyMessage.setFbaseKey(messageKey);
+                        mMessagesDatabaseReference.child(messageKey).setValue(friendlyMessage);
+
+                        Log.d(TAG, messageKey);
+
+                        // dismiss upload progress
+                        mProgress.dismiss();
+
+                        //increment counter
+                        mCounter += 1;
+                    }
+                });
     }
 }
 
