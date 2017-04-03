@@ -35,11 +35,13 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageMetadata;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -78,6 +80,7 @@ public class ChatRoom extends AppCompatActivity {
     private StorageReference mStorage;
     private ProgressDialog mProgress;
     private int mCounter;
+    //private String mURL;
     
     // Requesting permission to RECORD_AUDIO
     private static final int REQUEST_RECORD_AUDIO_PERMISSION = 200;
@@ -275,10 +278,12 @@ public class ChatRoom extends AppCompatActivity {
 
         //get storage path
         final StorageReference filepath = mStorage.child("Audio").child(roomName).child(mCounter+".3gp");
+        StorageMetadata metadata = new StorageMetadata.Builder().setContentType("audio/3gpp").build();
+        final String mURL = filepath.toString();
 
         //upload the file
         Uri uri = Uri.fromFile(new File(mFilename));
-        filepath.putFile(uri).addOnFailureListener(new OnFailureListener() {
+        filepath.putFile(uri, metadata).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
                 //Handle unsuccessful uploads
@@ -290,7 +295,8 @@ public class ChatRoom extends AppCompatActivity {
                         //Handle successful uploads
 
                         //send URL as message
-                        FriendlyMessage friendlyMessage = new FriendlyMessage(filepath.getPath(), mUsername, roomName);
+
+                        FriendlyMessage friendlyMessage = new FriendlyMessage(mURL, mUsername, roomName);
 
                         String messageKey = mMessagesDatabaseReference.push().getKey();
                         friendlyMessage.setFbaseKey(messageKey);
