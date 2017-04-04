@@ -32,7 +32,6 @@ public class FriendlyMessage {
 
     private String text;
     private String name;
-    private String type;
     private String fbaseKey;
     private String location;
     private int upvote;
@@ -40,10 +39,9 @@ public class FriendlyMessage {
     public FriendlyMessage() {
     }
 
-    public FriendlyMessage(String text, String name, String type, String location) {
+    public FriendlyMessage(String text, String name, String location) {
         this.text = text;
         this.name = name;
-        this.type = type;
         this.location = location;
         this.upvote = 0;
         this.fbaseKey = "";
@@ -61,8 +59,6 @@ public class FriendlyMessage {
     public String getName() {
         return name;
     }
-
-    public String getType() { return type; }
 
     public String getFbaseKey() { return fbaseKey; }
 

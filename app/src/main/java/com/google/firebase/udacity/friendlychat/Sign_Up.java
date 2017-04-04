@@ -1,18 +1,11 @@
 package com.google.firebase.udacity.friendlychat;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Spinner;
-import android.widget.Toast;
-import android.widget.AdapterView.OnItemSelectedListener;
 
 import com.google.android.gms.common.api.GoogleApiClient;
 
@@ -38,23 +31,6 @@ public class Sign_Up extends AppCompatActivity {
     private GoogleApiClient client2;
 
     protected void onCreate(Bundle savedInstanceState) {
-        SharedPreferences sharedPref = getSharedPreferences("mypref", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPref.edit();
-        String colour = sharedPref.getString("colour", "");
-
-        if(colour.equals("Red")){
-            setTheme(R.style.RedThemeNoActionBar);
-        }
-        if(colour.equals("Pink")){
-            setTheme(R.style.PinkThemeNoActionBar);
-        }
-        if(colour.equals("Blue Sky")){
-            setTheme(R.style.BlueThemeNoActionBar);
-        }
-        else {
-
-        }
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign__up);
 
@@ -68,7 +44,6 @@ public class Sign_Up extends AppCompatActivity {
         sign_up.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                    Toast.makeText(getBaseContext(), "Sign Up Successful!", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                     String name = first_name.getText().toString();
                     intent.putExtra(NAME, name);

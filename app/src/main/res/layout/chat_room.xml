@@ -2,27 +2,19 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:orientation= "vertical"
-    android:background="?attr/background_pic"
-    tools:context="com.google.firebase.udacity.friendlychat.MainActivity">
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.google.firebase.udacity.friendlychat.ChatRoom">
 
     <ListView
         android:id="@+id/messageListView"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:stackFromBottom="true"
+        android:divider="@android:color/transparent"
         android:transcriptMode="alwaysScroll"
-<<<<<<< HEAD
         tools:listitem="@layout/item_message"
         android:layout_above="@+id/linearLayout" />
-=======
-        android:divider="@null"
-        android:dividerHeight="10dp"
-        android:paddingBottom="10dp"
-        tools:listitem="@layout/item_message" />
->>>>>>> dev
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -31,38 +23,23 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:orientation="horizontal"
-        android:paddingBottom="2dp">
+        android:orientation="horizontal">
 
         <EditText
             android:id="@+id/messageEditText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-<<<<<<< HEAD
             android:layout_weight="1"
             android:inputType="text" />
-=======
-            android:backgroundTint="@color/blue"
-            android:layout_weight="100"
-            android:textColor="?attr/edittextchatroom"
-            android:textColorHint="#20f200" />
->>>>>>> dev
 
         <Button
             android:id="@+id/sendButton"
-            android:layout_width="47dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-            android:background="?attr/send_button"
-            />
-
-        <Button
-            android:id="@+id/RecordButton"
-            android:layout_width="55dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="bottom"
-            android:background="@android:drawable/presence_audio_online" />
+            android:enabled="false"
+            android:text="@string/send_button_label"/>
 
         <Button
             android:id="@+id/RecordButton"
@@ -81,4 +58,5 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"/>
+
 </RelativeLayout>
