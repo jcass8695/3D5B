@@ -33,7 +33,7 @@ import java.util.List;
 
 public class TeacherChatroom extends AppCompatActivity {
 
-    private static final String TAG = "ChatRoom";
+    private static final String TAG = "TeacherChatroom";
     //private static final int RC_PHOTO_PICKER = 2;
 
     public static final String ANONYMOUS = "anonymous";
@@ -41,7 +41,8 @@ public class TeacherChatroom extends AppCompatActivity {
     public static final int DEFAULT_MSG_LENGTH_LIMIT = 1000;
 
     private ListView mMessageListView;
-    private MessageAdapter mMessageAdapter;
+    //private TeacherMessageAdapter mMessageAdapter;
+    private TeacherMessageAdapter mMessageAdapter;
     private ProgressBar mProgressBar;
     private EditText mMessageEditText;
     private Button mSendButton;
@@ -82,13 +83,15 @@ public class TeacherChatroom extends AppCompatActivity {
         mSendButton = (Button) findViewById(R.id.sendButton);
         mSignout = (Button) findViewById(R.id.sign_out_menu);
         mAnswerButton = (Button) findViewById(R.id.answerButton);
-        mBlockButton = (Button) findViewById(R.id.blockButton);
+        //mBlockButton = (Button) findViewById(R.id.blockButton);
 
         //mMessageListView.setVisibility(View.INVISIBLE);
 
         // Initialize message ListView and its adapter
         List<FriendlyMessage> friendlyMessages = new ArrayList<>();
-        mMessageAdapter = new MessageAdapter(this, R.layout.teacher_item_message, friendlyMessages);
+        //mMessageAdapter = new TeacherMessageAdapter(this, R.layout.teacher_item_message, friendlyMessages);
+        mMessageAdapter = new TeacherMessageAdapter(
+                this, R.layout.teacher_item_message, friendlyMessages);
 
         mMessageListView.setAdapter(mMessageAdapter);
 
@@ -133,26 +136,26 @@ public class TeacherChatroom extends AppCompatActivity {
                 mMessageEditText.setText("");
             }
         });
-        mAnswerButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), Answers.class);
-                startActivityForResult(intent, 0);
-
-            }
-        });
-        mBlockButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                //NEED TO DELETE MESSAGE HERE
-
-            }
-        });
-
-
-
-
+//        mAnswerButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(getApplicationContext(), Answers.class);
+//                startActivityForResult(intent, 0);
+//
+//            }
+//        });
+//        mBlockButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//                //NEED TO DELETE MESSAGE HERE
+//
+//            }
+//        });
+//
+//
+//
+//
         mChildEventListener = new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {

@@ -74,8 +74,8 @@ public class MainActivity extends AppCompatActivity {
 
         listView = (ListView) findViewById(R.id.moduleListView);
 
-        arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,
-                list_of_rooms);
+        arrayAdapter = new ArrayAdapter<String>(
+                this, android.R.layout.simple_list_item_1, list_of_rooms);
 
         listView.setAdapter(arrayAdapter);
         final String modules[] = new String[]{"3C1", "3C2", "3D1", "3D2", "3D5B"};
@@ -107,6 +107,11 @@ public class MainActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l){
+              //if (user=="student"){
+//
+            //Intent intent = new Intent(getApplicationContext(), ChatRoom.class);
+            //}
+                //else {
                 Intent intent = new Intent(getApplicationContext(), TeacherChatroom.class);
                 intent.putExtra("room_name",((TextView)view).getText().toString() );
                 intent.putExtra("user_name", mUsername);

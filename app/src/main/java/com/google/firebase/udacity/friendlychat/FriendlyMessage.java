@@ -65,4 +65,5 @@ public class FriendlyMessage {
 
     public void incrementUpvote() { this.upvote++; }
 
+
 }

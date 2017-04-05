@@ -17,11 +17,11 @@
             </intent-filter>
         </activity>
         <activity android:name=".Sign_Up" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity"/>
+        <activity android:name=".Answers"/>
 
-
-        </activity>
         <activity android:name=".ChatRoom"/>
+        <activity android:name=".TeacherChatroom"/>
 
     </application>
 
