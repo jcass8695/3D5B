@@ -14,6 +14,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -40,6 +42,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.List;
 
@@ -69,21 +72,17 @@ public class TeacherMessageAdapter extends ArrayAdapter<FriendlyMessage> {
 
         TextView messageTextView = (TextView) convertView.findViewById(R.id.messageTextView);
         TextView authorTextView = (TextView) convertView.findViewById(R.id.nameTextView);
-//        final TextView upvoteTextView = (TextView) convertView.findViewById(R.id.upvoteTextView);
-//         Button upvoteButton = (Button) convertView.findViewById(R.id.upvoteButton);
-         Button mAnswerButton = (Button) convertView.findViewById(R.id.answerButton);
-     //   upvoteButton.setFocusable(true);
-    //    mAnswerButton.setFocusable(true);
-    //    upvoteButton.setClickable(true);
-      //  mAnswerButton.setClickable(true);
-       // upvoteButton.setEnabled(true);
+        final TextView upvoteTextView = (TextView) convertView.findViewById(R.id.upvoteTextView);
+        Button upvoteButton = (Button) convertView.findViewById(R.id.upvoteButton);
+        Button mAnswerButton = (Button) convertView.findViewById(R.id.answerButton);
+        Button deleteButton = (Button) convertView.findViewById(R.id.blockButton);
         final FriendlyMessage message = getItem(position);
 
         final String chatroom = message.getLocation();
         messageTextView.setVisibility(View.VISIBLE);
         messageTextView.setText(message.getText());
         authorTextView.setText(message.getName());
-       // upvoteTextView.setText(Integer.toString(message.getUpvote()));
+       upvoteTextView.setText(Integer.toString(message.getUpvote()));
 
         mAnswerButton.setEnabled(true);
         mAnswerButton.setOnClickListener(new View.OnClickListener() {
@@ -95,44 +94,37 @@ public class TeacherMessageAdapter extends ArrayAdapter<FriendlyMessage> {
             }
         });
 
-//        upvoteButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View convertView) {
-//                mFirebaseDatabase = FirebaseDatabase.getInstance();
-//                mMessagesDatabaseReference = mFirebaseDatabase.getReference().child(chatroom).child(message.getFbaseKey());
-//
-//                message.incrementUpvote();
-//                upvoteTextView.setText(Integer.toString(message.getUpvote()));
-//                mMessagesDatabaseReference.setValue(message);
-//            }
-//        });
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        MenuInflater inflater = getMenuInflater();
-//        inflater.inflate(R.menu.main_menu, menu);
-//        return true;
-//    }
-//
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        switch (item.getItemId()) {
-//            case R.id.sign_out_menu:
-//                Intent intent = new Intent(getContext(), Sign_in.class);
-//                getContext().startActivity(intent);
-//
-//            default:
-//                return super.onOptionsItemSelected(item);
-//        }
-//    }
-//
-//    public boolean isItemInArray(String s, String[] mod, int size){
-//        for(int i = 0; i< size;i++)
-//        {
-//            if(mod[i]==s)
-//                return true;
-//        }
-//        return false;
-//    };
+        deleteButton.setEnabled(true);
+        deleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View convertView) {
+                mFirebaseDatabase = FirebaseDatabase.getInstance();
+                mMessagesDatabaseReference = mFirebaseDatabase.getReference().child(chatroom).child(message.getFbaseKey());
+                mMessagesDatabaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        mMessagesDatabaseReference.getRef().removeValue();
+                        message.setText("MESSAGE REMOVED");
+                    }
 
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
 
+                    }
+                });
+            }
+        });
+        upvoteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View convertView) {
+                mFirebaseDatabase = FirebaseDatabase.getInstance();
+                mMessagesDatabaseReference = mFirebaseDatabase.getReference().child(chatroom).child(message.getFbaseKey());
+
+                message.incrementUpvote();
+                upvoteTextView.setText(Integer.toString(message.getUpvote()));
+                mMessagesDatabaseReference.setValue(message);
+            }
+        });
 
         return convertView;
     }
