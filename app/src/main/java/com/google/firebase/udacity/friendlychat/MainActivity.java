@@ -69,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
     private String name;
     private DatabaseReference root = FirebaseDatabase.getInstance().getReference().getRoot();
     public final ArrayList<String> modules = new ArrayList<String>();
+    String user;
 
 
 
@@ -108,6 +109,7 @@ public class MainActivity extends AppCompatActivity {
         Cursor res=mydb.check_users(mUsername);
         String department_table;
         while(res.moveToNext()) {
+            user=res.getString(4);
             department_table = res.getString(5);
             Cursor res_2 = mydb.get_all_modules(department_table);
             while (res_2.moveToNext()) {
@@ -158,12 +160,23 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l){
 
-                Intent intent = new Intent(getApplicationContext(), TeacherChatroom.class);
-                //Intent intent = new Intent(getApplicationContext(), ChatRoom.class);
-                intent.putExtra("room_name",((TextView)view).getText().toString() );
-                intent.putExtra("user_name", mUsername);
-                intent.putExtra("session_status", inSession);
-                startActivity(intent);
+                Intent intent;
+                if(user.equals("Student")){
+                    intent = new Intent(getApplicationContext(), ChatRoom.class);
+                    intent.putExtra("room_name",((TextView)view).getText().toString() );
+                    intent.putExtra("user_name", mUsername);
+                    intent.putExtra("session_status", inSession);
+                    startActivity(intent);
+
+                }
+                else {
+                    intent = new Intent(getApplicationContext(), TeacherChatroom.class);
+                    intent.putExtra("room_name",((TextView)view).getText().toString() );
+                    intent.putExtra("user_name", mUsername);
+                    intent.putExtra("session_status", inSession);
+                    startActivity(intent);
+                }
+
             }
 
         });
