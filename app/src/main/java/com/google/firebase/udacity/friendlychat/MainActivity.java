@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
 
     private String mUsername;
 
-    private boolean inSession;
+    private boolean inSession=true;
     private ListView listView;
     private ArrayAdapter<String> arrayAdapter;
     private ArrayList<String> list_of_rooms = new ArrayList<>();
@@ -109,10 +109,10 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l){
               //if (user=="student"){
 //
-            //Intent intent = new Intent(getApplicationContext(), ChatRoom.class);
+            Intent intent = new Intent(getApplicationContext(), ChatRoom.class);
             //}
                 //else {
-                Intent intent = new Intent(getApplicationContext(), TeacherChatroom.class);
+                //Intent intent = new Intent(getApplicationContext(), TeacherChatroom.class);
                 intent.putExtra("room_name",((TextView)view).getText().toString() );
                 intent.putExtra("user_name", mUsername);
                 intent.putExtra("session_status", inSession);
@@ -127,7 +127,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.main_menu, menu);
+        inflater.inflate(R.menu.student_main_menu, menu);
         return true;
     }
 

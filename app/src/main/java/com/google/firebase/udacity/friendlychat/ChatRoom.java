@@ -171,7 +171,7 @@ public class ChatRoom extends AppCompatActivity {
 
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.main_menu, menu);
+        inflater.inflate(R.menu.student_main_menu, menu);
 
 
         return true;

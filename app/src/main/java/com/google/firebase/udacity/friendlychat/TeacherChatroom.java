@@ -49,7 +49,7 @@ public class TeacherChatroom extends AppCompatActivity {
     private Button mAnswerButton;
     private Button mBlockButton;
     private Button mSignout;
-    private boolean inSession = true;
+    private boolean inSession;
     private String mUsername, roomName;
 
 
@@ -136,26 +136,7 @@ public class TeacherChatroom extends AppCompatActivity {
                 mMessageEditText.setText("");
             }
         });
-//        mAnswerButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(getApplicationContext(), Answers.class);
-//                startActivityForResult(intent, 0);
-//
-//            }
-//        });
-//        mBlockButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//                //NEED TO DELETE MESSAGE HERE
-//
-//            }
-//        });
-//
-//
-//
-//
+
         mChildEventListener = new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
