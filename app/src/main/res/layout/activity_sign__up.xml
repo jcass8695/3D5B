@@ -23,72 +23,95 @@
             android:id="@+id/imageView2" />
 
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:layout_weight=".4">
+            android:layout_weight=".4"
+            android:orientation="vertical"
+            android:weightSum="1">
 
             <LinearLayout
-                android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="59dp">
+                android:layout_height="59dp"
+                android:orientation="horizontal">
 
                 <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="textPersonName"
-                    android:ems="10"
                     android:id="@+id/first_name"
-                    android:layout_weight="1"
-                    android:hint="First Name" />
-
-                <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textPersonName"
-                    android:ems="10"
-                    android:id="@+id/last_name"
                     android:layout_weight="1"
-                    android:hint="Last Name" />
+                    android:ems="10"
+                    android:hint="First Name"
+                    android:inputType="textPersonName" />
+
+                <EditText
+                    android:id="@+id/last_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:hint="Last Name"
+                    android:inputType="textPersonName" />
             </LinearLayout>
 
             <EditText
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:inputType="textEmailAddress"
-                android:ems="10"
                 android:id="@+id/email"
+                android:layout_width="match_parent"
+                android:layout_height="53dp"
+                android:ems="10"
                 android:hint="Email Address"
-                android:layout_weight="1" />
+                android:inputType="textEmailAddress" />
 
             <EditText
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:inputType="textPassword"
-                android:ems="10"
                 android:id="@+id/password"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:ems="10"
                 android:hint="Password"
-                android:layout_weight="1" />
+                android:inputType="textPassword" />
 
 
             <EditText
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:inputType="textPassword"
-                android:ems="10"
                 android:id="@+id/confirm_password"
+                android:layout_width="match_parent"
+                android:layout_height="67dp"
+                android:ems="10"
                 android:hint="Confirm Password"
-                android:layout_weight="1" />
+                android:inputType="textPassword" />
+
+            <Spinner
+                android:id="@+id/dropdown"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/first_name"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginBottom="13dp"
+                android:layout_weight="0.48"
+                android:spinnerMode="dropdown" />
+
+            <Spinner
+                android:id="@+id/department"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/sign_up"
+                android:layout_alignEnd="@+id/first_name"
+                android:layout_alignLeft="@+id/first_name"
+                android:layout_alignRight="@+id/first_name"
+                android:layout_alignStart="@+id/first_name"
+                android:layout_marginBottom="12dp"
+                android:layout_weight="0.51"
+                android:spinnerMode="dropdown" />
+
 
             <Button
-                android:text="Sign Up"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginBottom="42dp"
                 android:id="@+id/sign_up"
-                android:layout_weight=".9"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
-                android:textAllCaps="false"/>
+                android:layout_marginBottom="42dp"
+                android:text="Sign Up"
+                android:textAllCaps="false"
+                android:layout_weight="0.15" />
 
         </LinearLayout>
     </LinearLayout>
