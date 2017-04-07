@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="true"
+        jar="/home/breandan/.android/build-cache/015025b969a380919c54effd75cd7f70e270d7f9/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="7bde4c34162092e0a77e7f12dc85ed77c484cf5c">
+        <dex dex="/home/breandan/AndroidStudioProjects/3D5B-friendly_chat/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_e75913c807cf4daaed50a16b3041a7c3ad8b83d2/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/breandan/.android/build-cache/85e20775416d0e458a9c0e1048fcb3040ddbecb8/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="0d191c1a09e4892d059e5ce749e4ad4e08129e35">
+        <dex dex="/home/breandan/AndroidStudioProjects/3D5B-friendly_chat/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_ebc559766b6701ae705f20a1d85fa5d96d18bc99/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/breandan/AndroidStudioProjects/3D5B-friendly_chat/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="c82741bc129dd5f99f11a4ab8666ae24262053b6">
+        <dex dex="/home/breandan/AndroidStudioProjects/3D5B-friendly_chat/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run_4b6d11e911b4cd3ff2a57655e88a8db5824cf5fb/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/breandan/.android/build-cache/d64e0f9d01417bc92c147e7eb938e89c1b4fd742/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="15b049fedbd8e3926bf99d9e45dfc9b2a1043bb9">
+        <dex dex="/home/breandan/AndroidStudioProjects/3D5B-friendly_chat/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_1f4d8b92823e1b14c2b329de695a2e8a08e5baa0/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/breandan/AndroidStudioProjects/3D5B-friendly_chat/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="1a4100fe73d829fc4610db7d9293a6eba23970b4">
+        <dex dex="/home/breandan/AndroidStudioProjects/3D5B-friendly_chat/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_af99f9582bc0350e8766e6c7f308abd08b682075/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/breandan/.android/build-cache/02f51f49b4d8100870c99c3baecd29d8ce70f847/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="02741d05d4b697fba5e279e9881aaa1da0ca7c7f">
+        <dex dex="/home/breandan/AndroidStudioProjects/3D5B-friendly_chat/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_46d553b01726f5f6728259d83f9ebc2cb9161425/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/breandan/.android/build-cache/2290a363c492b425a4599cffd10f2a6bdca58fa0/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="0fb891e8f0cfba0513043a7bb357513d229ca2cd">
+        <dex dex="/home/breandan/AndroidStudioProjects/3D5B-friendly_chat/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_3384f440b8d155b7a6ea862548019a1b2bde2c0f/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/breandan/.android/build-cache/591d5ed682cd29a9959da6fcf0034379755b9fda/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="ecb496cc08dd52551fc5ec6db3bc0632e95a89bb">
+        <dex dex="/home/breandan/AndroidStudioProjects/3D5B-friendly_chat/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_6dc299f5e206d288ad472401814ac88f501f6553/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/breandan/.android/build-cache/5f27905541e480333abf2343f4af1a17fd1d5608/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="e2719c102dca3a7a5b02ce07f769362da6ddb4ab">
+        <dex dex="/home/breandan/AndroidStudioProjects/3D5B-friendly_chat/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_fe305edbf813735bbf39e7150ebea27f4e8ef476/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/breandan/.android/build-cache/011832efbfe495451d5219799332d4818c7ac4ce/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="cd7951e04cfb9a8bf008d544a478d9a8d8192d38">
+        <dex dex="/home/breandan/AndroidStudioProjects/3D5B-friendly_chat/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_5e8dc259744d003838e524af10d85b7f56494ae5/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/breandan/.android/build-cache/6da0246a64f5a6884f6e21c1d67497425486d13f/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="3e04ac8ca644ea7baddf6fdcf72e15c79e9df94a">
+        <dex dex="/home/breandan/AndroidStudioProjects/3D5B-friendly_chat/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_86d41bcb476dc033dc2f538981ac57047c19dcee/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/breandan/.android/build-cache/32f463f3ee2de1fc21eaa507bef7203f7dab8eae/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="c03bf57f358aa10d253f21989e93bcf6014b3b17">
+        <dex dex="/home/breandan/AndroidStudioProjects/3D5B-friendly_chat/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_2219a03a702a74c94a6af5ce27718fff1950d083/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/breandan/.android/build-cache/c92c26f3b8a23d9bea2e4e031b3f90e1b9f4d0c0/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="c9649557905bf7a80fca9e0d54cbcb7662627860">
+        <dex dex="/home/breandan/AndroidStudioProjects/3D5B-friendly_chat/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_d64d51d536cc2246f5228396f4eb0e69e39151c1/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/breandan/.android/build-cache/7e6b1b6853adf48c37ce8c55a8994b47e39eeadc/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
+        <dex dex="/home/breandan/AndroidStudioProjects/3D5B-friendly_chat/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_bcc65decea195ebe3ee11db71fd731a73042d77a/classes.dex" />
+    </item>
+
+</items>
