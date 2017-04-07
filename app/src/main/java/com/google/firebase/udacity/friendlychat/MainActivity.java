@@ -63,11 +63,13 @@ public class MainActivity extends AppCompatActivity {
     DatabaseHelper mydb=new DatabaseHelper(this);
     private String mUsername;
     private ListView listView;
+    private boolean inSession=true;
     private ArrayAdapter<String> arrayAdapter;
     private ArrayList<String> list_of_rooms = new ArrayList<>();
     private String name;
     private DatabaseReference root = FirebaseDatabase.getInstance().getReference().getRoot();
     public final ArrayList<String> modules = new ArrayList<String>();
+
 
 
     @Override
@@ -155,9 +157,12 @@ public class MainActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l){
-                Intent intent = new Intent(getApplicationContext(), ChatRoom.class);
+
+                Intent intent = new Intent(getApplicationContext(), TeacherChatroom.class);
+                //Intent intent = new Intent(getApplicationContext(), ChatRoom.class);
                 intent.putExtra("room_name",((TextView)view).getText().toString() );
                 intent.putExtra("user_name", mUsername);
+                intent.putExtra("session_status", inSession);
                 startActivity(intent);
             }
 
@@ -167,7 +172,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.main_menu, menu);
+        inflater.inflate(R.menu.student_main_menu, menu);
         return true;
     }
 

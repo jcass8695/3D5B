@@ -17,6 +17,8 @@
             android:theme="@style/NoActionBarTheme" />
         <activity android:name=".MainActivity" />
         <activity android:name=".ChatRoom" />
+        <activity android:name=".Answers"/>
+        <activity android:name=".TeacherChatroom"/>
         <activity
             android:name=".splash"
             android:theme="@style/NoActionBarTheme">
