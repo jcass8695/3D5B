@@ -1,14 +1,8 @@
-# FriendlyChat
-
-This repository contains code for the FriendlyChat project in the [Firebase in a Weekend: Android by Google](https://www.udacity.com/course/firebase-in-a-weekend-by-google-android--ud0352) Udacity course.
-
-## Overview
-
-FriendlyChat is an app that allows users to send and receive text and photos in realtime across platforms.
-
-## Setup
-
-Setup requires creating a Firebase project. See https://firebase.google.com/ for more information.
-
+# 3D5B Hands Up!
+	An app to create a better learning environment in the classroom. It is too often the case that
+	questions go unanswered in lectures because students are too shy or nervous of ridicule. Hands Up aims
+	to promote conversation between lecturer and their class by providing a realtime chat function which allows
+	students to send a lecturer questions with upvote features moving the best questions to the top.
+	
 ## License
 See [LICENSE](LICENSE)
