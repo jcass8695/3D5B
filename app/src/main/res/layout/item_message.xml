@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:id="@+id/content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:layout_alignParentRight="false"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/contentWithBackground"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:background="@drawable/patch"
+            android:paddingLeft="10dp"
+            android:paddingBottom="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/messageTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                android:maxWidth="240dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_alignParentRight="true"
+            android:gravity="right">
+
+            <ImageButton
+                android:text="Upvote"
+                android:layout_width="wrap_content"
+                android:background="?attr/thumbs_up"
+                android:layout_height="wrap_content"
+                android:id="@+id/upvoteButton"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true" />
+
+            <TextView
+                android:text="Upvotes"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/upvoteTextView"
+                android:numeric="integer"
+                android:textSize="24sp"
+                android:textColor="?attr/upvote_colour"
+                android:layout_alignBaseline="@+id/upvoteButton"
+                android:layout_alignBottom="@+id/upvoteButton"
+                android:layout_toLeftOf="@+id/upvoteButton"
+                android:layout_toStartOf="@+id/upvoteButton" />
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_marginLeft="@dimen/activity_horizontal_margin"
+android:layout_marginStart="@dimen/activity_horizontal_margin"
+android:orientation="vertical"
+android:layout_height="60dp">
+
+<RelativeLayout
+
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentTop="true"
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentStart="true">
+    <TextView
+        android:id="@+id/messageTextView"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        tools:text="Message"
+        android:layout_width="160dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <TextView
+            android:id="@+id/nameTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/messageTextView"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            tools:text="Name" />
+
+
+    </LinearLayout>
+</RelativeLayout>
+<Button
+    android:text="Upvote"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:id="@+id/upvoteButton"
+    android:layout_alignParentTop="true"
+    android:layout_alignParentRight="true"
+    android:layout_alignParentEnd="true" />
+    <Button
+        android:id="@+id/answerButton"
+        android:layout_width="77dp"
+        android:layout_height="37dp"
+        android:layout_gravity="right"
+        android:enabled="false"
+        android:text="Record"
+        android:layout_alignParentTop="true"
+        android:layout_toLeftOf="@+id/upvoteTextView"
+        android:layout_toStartOf="@+id/upvoteTextView"
+        android:layout_marginRight="17dp"
+        android:layout_marginEnd="17dp" />
+<TextView
+    android:text="Upvotes"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:id="@+id/upvoteTextView"
+    android:numeric="integer"
+    android:textSize="24sp"
+    android:layout_alignBaseline="@+id/upvoteButton"
+    android:layout_alignBottom="@+id/upvoteButton"
+    android:layout_toLeftOf="@+id/upvoteButton"
+    android:layout_toStartOf="@+id/upvoteButton" />
+
+    <Button
+        android:id="@+id/blockButton"
+        android:layout_width="77dp"
+        android:layout_height="37dp"
+        android:layout_gravity="right"
+        android:enabled="false"
+        android:text="Delete"
+        android:layout_alignParentBottom="true"
+        android:layout_alignLeft="@+id/answerButton"
+        android:layout_alignStart="@+id/answerButton"
+        android:layout_marginLeft="41dp"
+        android:layout_marginStart="41dp" />
+
+</RelativeLayout>

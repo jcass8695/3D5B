@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.jackcassidy.a3d5b">
+    package="com.google.firebase.udacity.friendlychat">
 
     <application
         android:allowBackup="true"
@@ -8,10 +8,22 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity
+            android:name=".Sign_in"
+            android:theme="@style/NoActionBarTheme"></activity>
+        <activity android:name=".Settings_Page" />
+        <activity
+            android:name=".Sign_Up"
+            android:theme="@style/NoActionBarTheme" />
+        <activity android:name=".MainActivity" />
+        <activity android:name=".ChatRoom" />
+        <activity android:name=".Answers"/>
+        <activity android:name=".TeacherChatroom"/>
+        <activity
+            android:name=".splash"
+            android:theme="@style/NoActionBarTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
